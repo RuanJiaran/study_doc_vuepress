@@ -6,21 +6,21 @@
 
 当我们想要更新一个子组件的时候，如下图绿色部分：
 
-![img](img/b41f6f30-f270-11eb-ab90-d9ae814b240d.png)
+![img](./img/b41f6f30-f270-11eb-ab90-d9ae814b240d.png)
 
 理想状态只调用该路径下的组件`render`：
 
-![img](img/bc0f2460-f270-11eb-85f6-6fac77c0c9b3.png)
+![img](./img/bc0f2460-f270-11eb-85f6-6fac77c0c9b3.png)
 
 但是`react`的默认做法是调用所有组件的`render`，再对生成的虚拟`DOM`进行对比（黄色部分），如不变则不进行更新
 
-![img](img/c2f0c4f0-f270-11eb-85f6-6fac77c0c9b3.png)
+![img](./img/c2f0c4f0-f270-11eb-85f6-6fac77c0c9b3.png)
 
 从上图可见，黄色部分`diff`算法对比是明显的性能浪费的情况
 
 ## 如何做
 
-在[React中如何避免不必要的render (opens new window)](https://mp.weixin.qq.com/s/h4NX4Plr6TCjoIhlawiJTg)中，我们了解到如何避免不必要的`render`来应付上面的问题，主要手段是通过`shouldComponentUpdate`、`PureComponent`、`React.memo`，这三种形式这里就不再复述
+在[React 中如何避免不必要的 render (opens new window)](https://mp.weixin.qq.com/s/h4NX4Plr6TCjoIhlawiJTg)中，我们了解到如何避免不必要的`render`来应付上面的问题，主要手段是通过`shouldComponentUpdate`、`PureComponent`、`React.memo`，这三种形式这里就不再复述
 
 除此之外， 常见性能优化常见的手段有如下：
 
@@ -36,14 +36,20 @@
 如果我们使用内联函数，则每次调用`render`函数时都会创建一个新的函数实例，如下：
 
 ```jsx
-import React from "react";
+import React from 'react'
 
 export default class InlineFunctionComponent extends React.Component {
   render() {
     return (
       <div>
         <h1>Welcome Guest</h1>
-        <input type="button" onClick={(e) => { this.setState({inputValue: e.target.value}) }} value="Click For Inline Function" />
+        <input
+          type="button"
+          onClick={e => {
+            this.setState({ inputValue: e.target.value })
+          }}
+          value="Click For Inline Function"
+        />
       </div>
     )
   }
@@ -53,16 +59,15 @@ export default class InlineFunctionComponent extends React.Component {
 我们应该在组件内部创建一个函数，并将事件绑定到该函数本身。这样每次调用 `render` 时就不会创建单独的函数实例，如下：
 
 ```jsx
-import React from "react";
+import React from 'react'
 
 export default class InlineFunctionComponent extends React.Component {
-  
-  setNewStateData = (event) => {
+  setNewStateData = event => {
     this.setState({
-      inputValue: e.target.value
+      inputValue: e.target.value,
     })
   }
-  
+
   render() {
     return (
       <div>
@@ -84,14 +89,14 @@ export default class InlineFunctionComponent extends React.Component {
 
 ```jsx
 export default class NestedRoutingComponent extends React.Component {
-    render() {
-        return (
-            <>
-                <h1>This is the Header Component</h1>
-                <h2>Welcome To Demo Page</h2>
-            </>
-        )
-    }
+  render() {
+    return (
+      <>
+        <h1>This is the Header Component</h1>
+        <h2>Welcome To Demo Page</h2>
+      </>
+    )
+  }
 }
 ```
 
@@ -105,7 +110,7 @@ export default class NestedRoutingComponent extends React.Component {
 
 ### 使用 Immutable
 
-在[理解Immutable中 (opens new window)](https://mp.weixin.qq.com/s/laYJ_KNa8M5JNBnIolMDAA)，我们了解到使用 `Immutable`可以给 `React` 应用带来性能的优化，主要体现在减少渲染的次数
+在[理解 Immutable 中 (opens new window)](https://mp.weixin.qq.com/s/laYJ_KNa8M5JNBnIolMDAA)，我们了解到使用 `Immutable`可以给 `React` 应用带来性能的优化，主要体现在减少渲染的次数
 
 在做`react`性能优化的时候，为了避免重复渲染，我们会在`shouldComponentUpdate()`中做对比，当返回`true`执行`render`方法
 
@@ -118,13 +123,13 @@ export default class NestedRoutingComponent extends React.Component {
 而在`react`中使用到了`Suspense`和 `lazy`组件实现代码拆分功能，基本使用如下：
 
 ```jsx
-const johanComponent = React.lazy(() => import(/* webpackChunkName: "johanComponent" */ './myAwesome.component'));
- 
+const johanComponent = React.lazy(() => import(/* webpackChunkName: "johanComponent" */ './myAwesome.component'))
+
 export const johanAsyncComponent = props => (
   <React.Suspense fallback={<Spinner />}>
     <johanComponent {...props} />
   </React.Suspense>
-);
+)
 ```
 
 ### 服务端渲染
@@ -136,23 +141,23 @@ export const johanAsyncComponent = props => (
 例如：
 
 ```js
-import { renderToString } from "react-dom/server";
-import MyPage from "./MyPage";
-app.get("/", (req, res) => {
-  res.write("<!DOCTYPE html><html><head><title>My Page</title></head><body>");
-  res.write("<div id='content'>");  
-  res.write(renderToString(<MyPage/>));
-  res.write("</div></body></html>");
-  res.end();
-});
+import { renderToString } from 'react-dom/server'
+import MyPage from './MyPage'
+app.get('/', (req, res) => {
+  res.write('<!DOCTYPE html><html><head><title>My Page</title></head><body>')
+  res.write("<div id='content'>")
+  res.write(renderToString(<MyPage />))
+  res.write('</div></body></html>')
+  res.end()
+})
 ```
 
-客户端使用render方法来生成HTML
+客户端使用 render 方法来生成 HTML
 
 ```jsx
-import ReactDOM from 'react-dom';
-import MyPage from "./MyPage";
-ReactDOM.render(<MyPage />, document.getElementById('app'));
+import ReactDOM from 'react-dom'
+import MyPage from './MyPage'
+ReactDOM.render(<MyPage />, document.getElementById('app'))
 ```
 
 ### 其他

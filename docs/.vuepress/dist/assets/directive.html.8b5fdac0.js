@@ -1,0 +1,1 @@
+import{_ as t,o as r,c,b as e,e as a}from"./app.08a5ae43.js";const i={},d=e("h1",{id:"directive",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#directive","aria-hidden":"true"},"#"),a(" directive")],-1),o=[d];function s(_,n){return r(),c("div",null,o)}var l=t(i,[["render",s],["__file","directive.html.vue"]]);export{l as default};

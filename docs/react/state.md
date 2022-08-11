@@ -10,28 +10,28 @@
 import React, { Component } from 'react'
 
 export default class App extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props)
 
-        this.state = {
-            message: "Hello World"
-        }
+    this.state = {
+      message: 'Hello World',
     }
+  }
 
-    render() {
-        return (
-            <div>
-                <h2>{this.state.message}</h2>
-                <button onClick={e => this.changeText()}>面试官系列</button>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <h2>{this.state.message}</h2>
+        <button onClick={e => this.changeText()}>面试官系列</button>
+      </div>
+    )
+  }
 
-    changeText() {
-        this.setState({
-            message: "JS每日一题"
-        })
-    }
+  changeText() {
+    this.setState({
+      message: 'JS每日一题',
+    })
+  }
 }
 ```
 
@@ -54,16 +54,14 @@ changeText() {
 关于`state`方法的定义是从`React.Component`中继承，定义的源码如下：
 
 ```js
-Component.prototype.setState = function(partialState, callback) {
+Component.prototype.setState = function (partialState, callback) {
   invariant(
-    typeof partialState === 'object' ||
-      typeof partialState === 'function' ||
-      partialState == null,
+    typeof partialState === 'object' || typeof partialState === 'function' || partialState == null,
     'setState(...): takes an object of state variables to update or a ' +
-      'function which returns an object of state variables.',
-  );
-  this.updater.enqueueSetState(this, partialState, callback, 'setState');
-};
+      'function which returns an object of state variables.'
+  )
+  this.updater.enqueueSetState(this, partialState, callback, 'setState')
+}
 ```
 
 !>从上面可以看到`setState`第一个参数可以是一个对象，或者是一个函数，而第二个参数是一个回调函数，用于可以实时的获取到更新之后的数据
@@ -136,21 +134,19 @@ componentDidMount() {
 ### 小结
 
 - 在组件生命周期或 React 合成事件中，setState 是异步
-- 在setTimeout，setInterval 或者原生 dom 事件中，setState是同步
+- 在 setTimeout，setInterval 或者原生 dom 事件中，setState 是同步
 
 ## setState 是什么原因决定异步还是同步的
 
 this.state 是否异步，关键是看是否命中 batchUpdata 机制，命中就异步，未命中就同步。
 
-关于batchUpdate机制咱们看下官网的主流程图：
+关于 batchUpdate 机制咱们看下官网的主流程图：
 
-![img](img/v2-3dd589bd3985a388491899bdbcfe81d8_720w.jpg)
+![img](./img/v2-3dd589bd3985a388491899bdbcfe81d8_720w.jpg)
 
-![img](img/v2-5d6e8e2b2e108a665ac8fbbb3112f9d9_720w.jpg)
+![img](./img/v2-5d6e8e2b2e108a665ac8fbbb3112f9d9_720w.jpg)
 
-
-
-查看batchUpdate是否命中是决定setState异步或者同步的关键，如图所示，如果命中代表当前是异步，会执行保存组件到dirtyComponents中，如果没有命中会走右边，遍历所有dirtyComponents并执行调用和更新操作，当前就是同步。
+查看 batchUpdate 是否命中是决定 setState 异步或者同步的关键，如图所示，如果命中代表当前是异步，会执行保存组件到 dirtyComponents 中，如果没有命中会走右边，遍历所有 dirtyComponents 并执行调用和更新操作，当前就是同步。
 
 ##### 哪些能命中 batchUpdate 机制
 
@@ -158,7 +154,7 @@ this.state 是否异步，关键是看是否命中 batchUpdata 机制，命中�
 - react 注册的事件和它调用的函数
 - react 可以管理的入口命中的就是异步
 
-##### 哪些不能命中batchUpdate机制
+##### 哪些不能命中 batchUpdate 机制
 
 - setTimeout，setInterval 和他调用的函数
 - 自定义 dom 事件和他调用的函数
@@ -170,20 +166,20 @@ this.state 是否异步，关键是看是否命中 batchUpdata 机制，命中�
 
 ```jsx
 handleClick = () => {
-    this.setState({
-        count: this.state.count + 1,
-    })
-    console.log(this.state.count) // 1
+  this.setState({
+    count: this.state.count + 1,
+  })
+  console.log(this.state.count) // 1
 
-    this.setState({
-        count: this.state.count + 1,
-    })
-    console.log(this.state.count) // 1
+  this.setState({
+    count: this.state.count + 1,
+  })
+  console.log(this.state.count) // 1
 
-    this.setState({
-        count: this.state.count + 1,
-    })
-    console.log(this.state.count) // 1
+  this.setState({
+    count: this.state.count + 1,
+  })
+  console.log(this.state.count) // 1
 }
 ```
 
@@ -208,12 +204,12 @@ Object.assign(
 
 ```jsx
 onClick = () => {
-    this.setState((prevState, props) => {
-      return {count: prevState.count + 1};
-    });
-    this.setState((prevState, props) => {
-      return {count: prevState.count + 1};
-    });
+  this.setState((prevState, props) => {
+    return { count: prevState.count + 1 }
+  })
+  this.setState((prevState, props) => {
+    return { count: prevState.count + 1 }
+  })
 }
 ```
 

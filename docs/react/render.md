@@ -6,9 +6,9 @@
 
 ```jsx
 class Foo extends React.Component {
-    render() {
-        return <h1> Foo </h1>;
-    }
+  render() {
+    return <h1> Foo </h1>
+  }
 }
 ```
 
@@ -16,7 +16,7 @@ class Foo extends React.Component {
 
 ```js
 function Foo() {
-    return <h1> Foo </h1>;
+  return <h1> Foo </h1>
 }
 ```
 
@@ -24,7 +24,7 @@ function Foo() {
 
 ```jsx
 return (
-  <div className='cn'>
+  <div className="cn">
     <Header> hello </Header>
     <div> start </div>
     Right Reserve
@@ -35,24 +35,14 @@ return (
 `babel` 编译后：
 
 ```js
-return (
-  React.createElement(
-    'div',
-    {
-      className : 'cn'
-    },
-    React.createElement(
-      Header,
-      null,
-      'hello'
-    ),
-    React.createElement(
-      'div',
-      null,
-      'start'
-    ),
-    'Right Reserve'
-  )
+return React.createElement(
+  'div',
+  {
+    className: 'cn',
+  },
+  React.createElement(Header, null, 'hello'),
+  React.createElement('div', null, 'start'),
+  'Right Reserve'
 )
 ```
 
@@ -61,7 +51,7 @@ return (
 在 `react`中，这个元素就是虚拟 `DOM ` 树的节点，接收三个参数：
 
 - type：标签
-- attributes：标签属性，若无则为null
+- attributes：标签属性，若无则为 null
 - children：标签的子节点
 
 这些虚拟`DOM`树最终会渲染成真实`DOM`
@@ -76,26 +66,26 @@ return (
 
 ```jsx
 class Foo extends React.Component {
-  state = { count: 0 };
+  state = { count: 0 }
 
   increment = () => {
-    const { count } = this.state;
+    const { count } = this.state
 
-    const newCount = count < 10 ? count + 1 : count;
+    const newCount = count < 10 ? count + 1 : count
 
-    this.setState({ count: newCount });
-  };
+    this.setState({ count: newCount })
+  }
 
   render() {
-    const { count } = this.state;
-    console.log("Foo render");
+    const { count } = this.state
+    console.log('Foo render')
 
     return (
       <div>
         <h1> {count} </h1>
         <button onClick={this.increment}>Increment</button>
       </div>
-    );
+    )
   }
 }
 ```
@@ -106,21 +96,21 @@ class Foo extends React.Component {
 
 ```jsx
 function Foo() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0)
 
   function increment() {
-    const newCount = count < 10 ? count + 1 : count;
-    setCount(newCount);
+    const newCount = count < 10 ? count + 1 : count
+    setCount(newCount)
   }
 
-  console.log("Foo render");
-  
+  console.log('Foo render')
+
   return (
     <div>
       <h1> {count} </h1>
       <button onClick={increment}>Increment</button>
     </div>
-  );
+  )
 }
 ```
 
@@ -130,27 +120,25 @@ function Foo() {
 
 ```js
 class App extends React.Component {
-  state = { name: "App" };
+  state = { name: 'App' }
   render() {
     return (
       <div className="App">
         <Foo />
-        <button onClick={() => this.setState({ name: "App" })}>
-          Change name
-        </button>
+        <button onClick={() => this.setState({ name: 'App' })}>Change name</button>
       </div>
-    );
+    )
   }
 }
 
 function Foo() {
-  console.log("Foo render");
+  console.log('Foo render')
 
   return (
     <div>
       <h1> Foo </h1>
     </div>
-  );
+  )
 }
 ```
 
@@ -159,27 +147,25 @@ function Foo() {
 - 函数组件重新渲染
 
 ```jsx
-function App(){
-    const [name,setName] = useState('App')
+function App() {
+  const [name, setName] = useState('App')
 
-    return (
-        <div className="App">
-            <Foo />
-            <button onClick={() => setName("aaa")}>
-                { name }
-            </button>
-      </div>
-    )
+  return (
+    <div className="App">
+      <Foo />
+      <button onClick={() => setName('aaa')}>{name}</button>
+    </div>
+  )
 }
 
 function Foo() {
-  console.log("Foo render");
+  console.log('Foo render')
 
   return (
     <div>
       <h1> Foo </h1>
     </div>
-  );
+  )
 }
 ```
 
@@ -199,4 +185,4 @@ render`函数里面可以编写`JSX`，转化成`createElement`这种形式，�
 
 - 一旦执行了`setState`就会执行`render`方法，`useState` 会判断当前值有无发生改变确定是否执行`render`方法，一旦父组件发生渲染，子组件也会渲染
 
-![img](img/229784b0-ecf5-11eb-ab90-d9ae814b240d.png)
+![img](./img/229784b0-ecf5-11eb-ab90-d9ae814b240d.png)

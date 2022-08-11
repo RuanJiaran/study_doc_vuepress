@@ -28,17 +28,15 @@ const Hello = ({ name, age }: Props) => {
 }
 ```
 
-
-
 ## 事件绑定和事件对象
 
 ##### click 事件
 
 ```tsx
-<button onClick={attention}>关注</button>
+;<button onClick={attention}>关注</button>
 
 const attention = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('关注', e.currentTarget)
+  console.log('关注', e.currentTarget)
 }
 ```
 
@@ -87,10 +85,8 @@ function App() {
 export default App
 ```
 
-
-
 ## 技巧
 
 假如我们不知道事件的对象类型，那么我们可以在 jsx 中写事件处理程序（ `e=>{}`），然后把鼠标放到 e 上，利用 ts 的类型推断来查看事件对象类型。
 
-![image-20220801172335728](img/image-20220801172335728.png)
+![image-20220801172335728](./img/image-20220801172335728.png)

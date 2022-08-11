@@ -2,7 +2,7 @@
 
 ## 常用 bom 属性
 
-![](img/bom1.png)
+![](./img/bom1.png)
 
 #### navigator（浏览器对象）
 

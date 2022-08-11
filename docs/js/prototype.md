@@ -53,7 +53,7 @@ console.log('date', date.__proto__)
 console.log('reg', reg.__proto__)
 ```
 
-![](img/微信截图_20220426174433.png)
+![](./img/微信截图_20220426174433.png)
 
 ```js
 const arr = [1, 2, 3]
@@ -84,11 +84,11 @@ console.log(child.father) // undefined
 
 **执行步骤：**
 
-![](img/20180620134143385.png)
+![](./img/20180620134143385.png)
 
 **访问链路：**
 
-![](img/20180620155400807.png)
+![](./img/20180620155400807.png)
 
 > 一直往上层查找，直到找到 null 还没有找到，则返回`undefined`
 >

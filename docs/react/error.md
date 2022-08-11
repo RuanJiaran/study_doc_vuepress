@@ -24,27 +24,27 @@
 ```jsx
 class ErrorBoundary extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { hasError: false };
+    super(props)
+    this.state = { hasError: false }
   }
 
   static getDerivedStateFromError(error) {
     // 更新 state 使下一次渲染能够显示降级后的 UI
-    return { hasError: true };
+    return { hasError: true }
   }
 
   componentDidCatch(error, errorInfo) {
     // 你同样可以将错误日志上报给服务器
-    logErrorToMyService(error, errorInfo);
+    logErrorToMyService(error, errorInfo)
   }
 
   render() {
     if (this.state.hasError) {
       // 你可以自定义降级后的 UI 并渲染
-      return <h1>Something went wrong.</h1>;
+      return <h1>Something went wrong.</h1>
     }
 
-    return this.props.children; 
+    return this.props.children
   }
 }
 ```
@@ -68,7 +68,7 @@ class ErrorBoundary extends React.Component {
 
 除了错误信息和 JavaScript 栈外，React 16 还提供了组件栈追踪。现在你可以准确地查看发生在组件树内的错误信息：
 
-![img](img/7b2b51d0-f289-11eb-ab90-d9ae814b240d.png)
+![img](./img/7b2b51d0-f289-11eb-ab90-d9ae814b240d.png)
 
 可以看到在错误信息下方文字中存在一个组件栈，便于我们追踪错误
 
@@ -79,16 +79,16 @@ class ErrorBoundary extends React.Component {
 ```jsx
 class MyComponent extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { error: null };
-    this.handleClick = this.handleClick.bind(this);
+    super(props)
+    this.state = { error: null }
+    this.handleClick = this.handleClick.bind(this)
   }
 
   handleClick() {
     try {
       // 执行操作，如有错误则会抛出
     } catch (error) {
-      this.setState({ error });
+      this.setState({ error })
     }
   }
 

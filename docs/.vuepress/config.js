@@ -8,6 +8,7 @@ module.exports = {
   lang: 'zh-CN',
   title: '学习笔记',
   description: '个人学习笔记',
+  base: '/study',
   markdown: {
     headers: {
       level: [1, 2, 3, 4],
@@ -82,6 +83,14 @@ module.exports = {
         },
       ],
       '/js/': [...getSidebar('js', getFileName(rootpath + '/js/'), false)],
+      '/ts/': [...getSidebar('ts', getFileName(rootpath + '/ts/'), false)],
+      '/vue2/': [...getSidebar('vue2', getFileName(rootpath + '/vue2/'), false)],
+      '/react/': [...getSidebar('react', getFileName(rootpath + '/react/'), false)],
+      '/react-admin/': [...getSidebar('react-admin', getFileName(rootpath + '/react-admin/'), false)],
+      '/nestjs/': [...getSidebar('nestjs', getFileName(rootpath + '/nestjs/'), false)],
+      '/http/': [...getSidebar('http', getFileName(rootpath + '/http/'), false)],
+      '/html-css/': [...getSidebar('html-css', getFileName(rootpath + '/html-css/'), false)],
+      '/docker/': [...getSidebar('docker', getFileName(rootpath + '/docker/'), false)],
     },
   }),
 }

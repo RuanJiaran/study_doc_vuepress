@@ -4,7 +4,7 @@ WebSocket，是一种网络传输协议，位于`OSI`模型的应用层。可在
 
 客户端和服务器只需要完成一次握手，两者之间就可以创建持久性的连接，并进行双向数据传输
 
-![img](img/ad386e20-c0f1-11eb-85f6-6fac77c0c9b3.png)
+![img](./img/ad386e20-c0f1-11eb-85f6-6fac77c0c9b3.png)
 
 从上图可见，`websocket`服务器与客户端通过握手连接，连接成功后，两者都能主动的向对方发送或接受数据
 
@@ -32,7 +32,7 @@ WebSocket，是一种网络传输协议，位于`OSI`模型的应用层。可在
 
 ### 协议名
 
-引入`ws`和`wss`分别代表明文和密文的`websocket`协议，且默认端口使用80或443，几乎与`http`一致
+引入`ws`和`wss`分别代表明文和密文的`websocket`协议，且默认端口使用 80 或 443，几乎与`http`一致
 
 ```http
 ws://www.chrono.com
@@ -57,10 +57,10 @@ Sec-WebSocket-Protocol: chat, superchat
 Sec-WebSocket-Version: 13
 ```
 
-- Connection：必须设置Upgrade，表示客户端希望连接升级
-- Upgrade：必须设置Websocket，表示希望升级到Websocket协议
-- Sec-WebSocket-Key：客户端发送的一个 base64 编码的密文，用于简单的认证秘钥。要求服务端必须返回一个对应加密的“Sec-WebSocket-Accept应答，否则客户端会抛出错误，并关闭连接
-- Sec-WebSocket-Version ：表示支持的Websocket版本
+- Connection：必须设置 Upgrade，表示客户端希望连接升级
+- Upgrade：必须设置 Websocket，表示希望升级到 Websocket 协议
+- Sec-WebSocket-Key：客户端发送的一个 base64 编码的密文，用于简单的认证秘钥。要求服务端必须返回一个对应加密的“Sec-WebSocket-Accept 应答，否则客户端会抛出错误，并关闭连接
+- Sec-WebSocket-Version ：表示支持的 Websocket 版本
 
 服务端返回的数据格式：
 
@@ -76,12 +76,12 @@ Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=Sec-WebSocket-Protocol: chat
 
 ### 优点
 
-- 较少的控制开销：数据包头部协议较小，不同于http每次请求需要携带完整的头部
-- 更强的实时性：相对于HTTP请求需要等待客户端发起请求服务端才能响应，延迟明显更少
-- 保持创连接状态：创建通信后，可省略状态信息，不同于HTTP每次请求需要携带身份验证
+- 较少的控制开销：数据包头部协议较小，不同于 http 每次请求需要携带完整的头部
+- 更强的实时性：相对于 HTTP 请求需要等待客户端发起请求服务端才能响应，延迟明显更少
+- 保持创连接状态：创建通信后，可省略状态信息，不同于 HTTP 每次请求需要携带身份验证
 - 更好的二进制支持：定义了二进制帧，更好处理二进制内容
-- 支持扩展：用户可以扩展websocket协议、实现部分自定义的子协议
-- 更好的压缩效果：Websocket在适当的扩展支持下，可以沿用之前内容的上下文，在传递类似的数据时，可以显著地提高压缩率
+- 支持扩展：用户可以扩展 websocket 协议、实现部分自定义的子协议
+- 更好的压缩效果：Websocket 在适当的扩展支持下，可以沿用之前内容的上下文，在传递类似的数据时，可以显著地提高压缩率
 
 ## 应用场景
 

@@ -41,7 +41,7 @@ element.addEventListener('keyup', function () {}, false)
 
 `事件冒泡` 就是由内往外，从具体的目标节点元素触发，逐级向上传递，直到根节点。
 
-![](img/eventdom1.png)
+![](./img/eventdom1.png)
 
 #### DOM 事件的事件流（事件传播）
 
@@ -94,7 +94,7 @@ DOM 完整的事件流包括三个阶段：`事件捕获阶段`、`目标阶段`
 </script>
 ```
 
-![](img/eventdom2.png)
+![](./img/eventdom2.png)
 
 #### 事件冒泡的具体过程
 
@@ -104,7 +104,7 @@ DOM 完整的事件流包括三个阶段：`事件捕获阶段`、`目标阶段`
 
 一张图带你了解事件委托
 
-![img](img/eventdom3.png)
+![img](./img/eventdom3.png)
 
 #### 概念
 
@@ -145,13 +145,13 @@ bindEvent(fu, 'click', function (event) {
 </script>
 ```
 
-![](img/eventdom4.png)
+![](./img/eventdom4.png)
 
 #### 示例 2 （在 vue 中事件委托）
 
 我们经常遇到 vue 中`v-for`一个列表，列表的每一项都绑定了`@click`处理事件。我们都知道绑定这么多监听，从性能方面来说是不太好的。那我们我们可以通过把每个 item 的 click 事件委托给父元素的形式来实现
 
-![](img/20200910171402992.png)
+![](./img/20200910171402992.png)
 
 ```js
 <table @click="edit">

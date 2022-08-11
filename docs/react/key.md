@@ -7,22 +7,22 @@ const data = [
   { id: 0, name: 'abc' },
   { id: 1, name: 'def' },
   { id: 2, name: 'ghi' },
-  { id: 3, name: 'jkl' }
-];
+  { id: 3, name: 'jkl' },
+]
 
-const ListItem = (props) => {
-  return <li>{props.name}</li>;
-};
+const ListItem = props => {
+  return <li>{props.name}</li>
+}
 
 const List = () => {
   return (
     <ul>
-      {data.map((item) => (
+      {data.map(item => (
         <ListItem name={item.name}></ListItem>
       ))}
     </ul>
-  );
-};
+  )
+}
 ```
 
 然后在输出就可以看到`react`所提示的警告信息：
@@ -39,12 +39,12 @@ Each child in a list should have a unique "key" prop.
 const List = () => {
   return (
     <ul>
-      {data.map((item) => (
+      {data.map(item => (
         <ListItem name={item.name} key={item.id}></ListItem>
       ))}
     </ul>
-  );
-};
+  )
+}
 ```
 
 ## 作用
@@ -91,7 +91,7 @@ insertMovie() {
 }
 ```
 
-当拥有`key`的时候，`react`根据`key`属性匹配原有树上的子元素以及最新树上的子元素，像上述情况只需要将000元素插入到最前面位置
+当拥有`key`的时候，`react`根据`key`属性匹配原有树上的子元素以及最新树上的子元素，像上述情况只需要将 000 元素插入到最前面位置
 
 当没有`key`的时候，所有的`li`标签都需要进行修改
 
@@ -106,9 +106,9 @@ insertMovie() {
 良好使用`key`属性是性能优化的非常关键的一步，注意事项为：
 
 - key 应该是唯一的
-- key不要使用随机值（随机数在下一次 render 时，会重新生成一个数字）
-- 使用 index 作为 key值，对性能没有优化
+- key 不要使用随机值（随机数在下一次 render 时，会重新生成一个数字）
+- 使用 index 作为 key 值，对性能没有优化
 
 `react`判断`key`的流程具体如下图：
 
-![img](img/3b9afe10-dd69-11eb-ab90-d9ae814b240d.png)
+![img](./img/3b9afe10-dd69-11eb-ab90-d9ae814b240d.png)

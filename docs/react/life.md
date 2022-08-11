@@ -19,7 +19,7 @@
 
 执行时机：组件创建和更新阶段，不论是`props`变化还是`state`变化，也会调用
 
-在每次`render`方法前调用，第一个参数为即将更新的`props`，第二个参数为上一个状态的`state`，可以比较`props` 和 `state`来加一些限制条件，防止无用的state更新
+在每次`render`方法前调用，第一个参数为即将更新的`props`，第二个参数为上一个状态的`state`，可以比较`props` 和 `state`来加一些限制条件，防止无用的 state 更新
 
 该方法需要返回一个新的对象作为新的`state`或者返回`null`表示`state`状态不需要更新
 
@@ -53,7 +53,7 @@
 
 用于告知组件本身基于当前的`props`和`state`是否需要重新渲染组件，默认情况返回`true`
 
-执行时机：到新的props或者state时都会调用，通过返回true或者false告知组件更新与否
+执行时机：到新的 props 或者 state 时都会调用，通过返回 true 或者 false 告知组件更新与否
 
 一般情况，不建议在该周期方法中进行深层比较，会影响效率
 
@@ -80,7 +80,7 @@ componentDidUpdate(prevProps, prevState, snapshot) {
 }
 ```
 
-此方法的目的在于获取组件更新前的一些信息，比如组件的滚动位置之类的，在组件更新后可以根据这些信息恢复一些UI视觉上的状态
+此方法的目的在于获取组件更新前的一些信息，比如组件的滚动位置之类的，在组件更新后可以根据这些信息恢复一些 UI 视觉上的状态
 
 ### componentDidUpdate
 
@@ -100,11 +100,11 @@ componentDidUpdate(prevProps, prevState, snapshot) {
 
 新版生命周期整体流程如下图所示：
 
-![img](img/66c999c0-d373-11eb-85f6-6fac77c0c9b3.png)
+![img](./img/66c999c0-d373-11eb-85f6-6fac77c0c9b3.png)
 
 旧的生命周期流程图如下：
 
-![img](img/d379e420-d374-11eb-ab90-d9ae814b240d.png)
+![img](./img/d379e420-d374-11eb-ab90-d9ae814b240d.png)
 
 通过两个图的对比，可以发现新版的生命周期减少了以下三种方法：
 

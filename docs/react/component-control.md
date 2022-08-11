@@ -6,11 +6,11 @@
 
 ```jsx
 class TestComponent extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = { username: 'lindaidai' };
+  constructor(props) {
+    super(props)
+    this.state = { username: 'lindaidai' }
   }
-  render () {
+  render() {
     return <input name="username" value={this.state.username} />
   }
 }
@@ -33,18 +33,18 @@ class TestComponent extends React.Component {
 当需要时，可以使用`ref` 查询 `DOM`并查找其当前值，如下：
 
 ```jsx
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 export class UnControll extends Component {
-  constructor (props) {
-    super(props);
-    this.inputRef = React.createRef();
+  constructor(props) {
+    super(props)
+    this.inputRef = React.createRef()
   }
-  handleSubmit = (e) => {
-    console.log('我们可以获得input内的值为', this.inputRef.current.value);
-    e.preventDefault();
+  handleSubmit = e => {
+    console.log('我们可以获得input内的值为', this.inputRef.current.value)
+    e.preventDefault()
   }
-  render () {
+  render() {
     return (
       <form onSubmit={e => this.handleSubmit(e)}>
         <input defaultValue="lindaidai" ref={this.inputRef} />
@@ -63,4 +63,4 @@ export class UnControll extends Component {
 
 针对两者的区别，其应用场景如下图所示：
 
-![img](img/f28aed20-df2f-11eb-ab90-d9ae814b240d.png)
+![img](./img/f28aed20-df2f-11eb-ab90-d9ae814b240d.png)

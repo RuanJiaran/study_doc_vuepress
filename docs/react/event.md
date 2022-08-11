@@ -17,7 +17,7 @@ const button = <button onClick={handleClick}>按钮</button>
 如果想要获得原生`DOM`事件，可以通过`e.nativeEvent`属性获取
 
 ```js
-const handleClick = (e) => console.log(e.nativeEvent);;
+const handleClick = e => console.log(e.nativeEvent)
 const button = <button onClick={handleClick}>按钮</button>
 ```
 
@@ -27,8 +27,8 @@ const button = <button onClick={handleClick}>按钮</button>
 
 ```jsx
 // 原生事件绑定方式
-<button onclick="handleClick()">按钮命名</button>
-      
+;<button onclick="handleClick()">按钮命名</button>
+
 // React 合成事件绑定方式
 const button = <button onClick={handleClick}>按钮命名</button>
 ```
@@ -37,8 +37,8 @@ const button = <button onClick={handleClick}>按钮命名</button>
 
 ```jsx
 // 原生事件 事件处理函数写法
-<button onclick="handleClick()">按钮命名</button>
-      
+;<button onclick="handleClick()">按钮命名</button>
+
 // React 合成事件 事件处理函数写法
 const button = <button onClick={handleClick}>按钮命名</button>
 ```
@@ -54,32 +54,31 @@ const button = <button onClick={handleClick}>按钮命名</button>
 关于`React`合成事件与原生事件执行顺序，可以看看下面一个例子：
 
 ```jsx
-import  React  from 'react';
-class App extends React.Component{
-
+import React from 'react'
+class App extends React.Component {
   constructor(props) {
-    super(props);
-    this.parentRef = React.createRef();
-    this.childRef = React.createRef();
+    super(props)
+    this.parentRef = React.createRef()
+    this.childRef = React.createRef()
   }
   componentDidMount() {
-    console.log("React componentDidMount！");
-    this.parentRef.current?.addEventListener("click", () => {
-      console.log("原生事件：父元素 DOM 事件监听！");
-    });
-    this.childRef.current?.addEventListener("click", () => {
-      console.log("原生事件：子元素 DOM 事件监听！");
-    });
-    document.addEventListener("click", (e) => {
-      console.log("原生事件：document DOM 事件监听！");
-    });
+    console.log('React componentDidMount！')
+    this.parentRef.current?.addEventListener('click', () => {
+      console.log('原生事件：父元素 DOM 事件监听！')
+    })
+    this.childRef.current?.addEventListener('click', () => {
+      console.log('原生事件：子元素 DOM 事件监听！')
+    })
+    document.addEventListener('click', e => {
+      console.log('原生事件：document DOM 事件监听！')
+    })
   }
   parentClickFun = () => {
-    console.log("React 事件：父元素事件监听！");
-  };
+    console.log('React 事件：父元素事件监听！')
+  }
   childClickFun = () => {
-    console.log("React 事件：子元素事件监听！");
-  };
+    console.log('React 事件：子元素事件监听！')
+  }
   render() {
     return (
       <div ref={this.parentRef} onClick={this.parentClickFun}>
@@ -87,20 +86,20 @@ class App extends React.Component{
           分析事件执行顺序
         </div>
       </div>
-    );
+    )
   }
 }
-export default App;
+export default App
 ```
 
 输出顺序为：
 
 ```tex
-原生事件：子元素 DOM 事件监听！ 
-原生事件：父元素 DOM 事件监听！ 
-React 事件：子元素事件监听！ 
-React 事件：父元素事件监听！ 
-原生事件：document DOM 事件监听！ 
+原生事件：子元素 DOM 事件监听！
+原生事件：父元素 DOM 事件监听！
+React 事件：子元素事件监听！
+React 事件：父元素事件监听！
+原生事件：document DOM 事件监听！
 ```
 
 可以得出以下结论：
@@ -112,20 +111,20 @@ React 事件：父元素事件监听！
 
 对应过程如图所示：
 
-![img](img/08e22ff0-d870-11eb-ab90-d9ae814b240d.png)
+![img](./img/08e22ff0-d870-11eb-ab90-d9ae814b240d.png)
 
 所以想要阻止不同时间段的冒泡行为，对应使用不同的方法，对应如下：
 
-- 阻止合成事件间的冒泡，用e.stopPropagation()
-- 阻止合成事件与最外层 document 上的事件间的冒泡，用e.nativeEvent.stopImmediatePropagation()
-- 阻止合成事件与除最外层document上的原生事件上的冒泡，通过判断e.target来避免
+- 阻止合成事件间的冒泡，用 e.stopPropagation()
+- 阻止合成事件与最外层 document 上的事件间的冒泡，用 e.nativeEvent.stopImmediatePropagation()
+- 阻止合成事件与除最外层 document 上的原生事件上的冒泡，通过判断 e.target 来避免
 
 ```js
-document.body.addEventListener('click', e => {   
-    if (e.target && e.target.matches('div.code')) {  
-        return;    
-    }    
-    this.setState({   active: false,    });   }); 
+document.body.addEventListener('click', e => {
+    if (e.target && e.target.matches('div.code')) {
+        return;
+    }
+    this.setState({   active: false,    });   });
 }
 ```
 
@@ -133,7 +132,7 @@ document.body.addEventListener('click', e => {
 
 `React`事件机制总结如下：
 
-- React 上注册的事件最终会绑定在document这个 DOM 上，而不是 React 组件对应的 DOM(减少内存开销就是因为所有的事件都绑定在 document 上，其他节点没有绑定事件)
+- React 上注册的事件最终会绑定在 document 这个 DOM 上，而不是 React 组件对应的 DOM(减少内存开销就是因为所有的事件都绑定在 document 上，其他节点没有绑定事件)
 - React 自身实现了一套事件冒泡机制，所以这也就是为什么我们 event.stopPropagation()无效的原因。
 - React 通过队列的形式，从触发的组件向父组件回溯，然后调用他们 JSX 中定义的 callback
 - React 有一套自己的合成事件 SyntheticEvent
