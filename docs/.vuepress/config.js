@@ -8,7 +8,7 @@ module.exports = {
   lang: 'zh-CN',
   title: '学习笔记',
   description: '个人学习笔记',
-  base: '/study',
+  base: '/study/',
   markdown: {
     headers: {
       level: [1, 2, 3, 4],
