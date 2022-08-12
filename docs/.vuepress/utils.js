@@ -1,5 +1,9 @@
-const getFileName = rpath => {
-  const fs = require('fs')
+const rootpath = require('path').resolve(__dirname, '..') //执行一次dirname将目录定位到docs目录
+const fs = require('fs')
+
+const getFileName = path => {
+  const rpath = rootpath + '/' + path
+
   // 排除检查的文件
   const excludes = ['.DS_Store']
 
@@ -10,16 +14,16 @@ const getFileName = rpath => {
   fs.readdirSync(rpath).forEach(file => {
     if (excludes.indexOf(file) < 0) {
       const fullpath = rpath + '/' + file
-      var fileinfo = fs.statSync(fullpath)
+      const fileinfo = fs.statSync(fullpath)
+
       if (fileinfo.isFile()) {
-        // if(file.indexOf('.md') > 0) {
         if (fileTypes.test(file)) {
           if (file === 'index.md') {
             file = ''
           } else {
             file = file.replace('.md', '')
           }
-          filenames.push(file)
+          filenames.push(path + '/' + file)
         }
       }
     }
@@ -29,16 +33,12 @@ const getFileName = rpath => {
   return filenames
 }
 
-const getSidebar = (title, children = [''], collapsable = true, sidebarDepth = 6) => {
-  const arr = new Array()
-  arr.push({
-    title,
+const getSidebar = (title, children = [], collapsible = false) => {
+  return {
+    text: title,
     children,
-    collapsable,
-    sidebarDepth,
-  })
-
-  return arr
+    collapsible,
+  }
 }
 
-module.exports = { getFileName, getSidebar }
+module.exports = { rootpath, getFileName, getSidebar }

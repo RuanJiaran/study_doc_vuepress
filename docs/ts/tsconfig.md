@@ -1,3 +1,5 @@
+# tsconfig 配置详解
+
 使用命令生成配置文件
 
 ```shell
@@ -10,9 +12,9 @@ tsc -init
 {
   // 编译器选项
     "compilerOptions": {
-  
+
       /* 基本选项 */
-     
+
       "target": "es5",                       // 指定 ECMAScript 目标版本: 'ES3' (default), 'ES5', 'ES6','ES2015', 'ES2016', 'ES2017', or 'ESNEXT'
 //      注意：target将ts转为最终target js版本是不全的，有些无法转换，无法做到完全兼容
       // 例如 代理反射等功能，所以考虑兼容性必须还要使用 babel进行兼容性转换
@@ -33,11 +35,11 @@ tsc -init
       "noEmitOnError":true,                  // 当有错误的时候，不生成编译文件(.js)
       "importHelpers": true,                 // 从 tslib 导入辅助工具函数
       "isolatedModules": true,               // 将每个文件作为单独的模块 （与 'ts.transpileModule' 类似）.
-  
+
       /* 严格的类型检查选项 */
       "strict": true,                        // 启用所有严格类型检查选项
       //下面的总开关
-      "noImplicitAny": true,                 // 在表达式和声明上有隐含的 any类型时报错;--->没有写类型的值不会被推断为any 
+      "noImplicitAny": true,                 // 在表达式和声明上有隐含的 any类型时报错;--->没有写类型的值不会被推断为any
       "strictNullChecks": true,              // 启用严格的 null 检查
        // 例如获取dom，不成功，执行了属性，dom可能为null
       "noImplicitThis": true,                // 当 this 表达式值为 any 类型的时候，生成一个错误
@@ -51,7 +53,7 @@ tsc -init
       "noUnusedParameters": true,            // 有未使用的参数时，抛出错误
       "noImplicitReturns": true,             // 并不是所有函数里的代码都有返回值时，抛出错误
       "noFallthroughCasesInSwitch": true,    // 报告 switch 语句的 fallthrough 错误。（即，不允许 switch 的 case 语句贯穿）
-  
+
       /* 模块解析选项 */
       "moduleResolution": "node",            // 选择模块解析策略： 'node' (Node.js) or 'classic' (TypeScript pre-1.6)
       "baseUrl": "./",                       // 用于解析非相对模块名称的基目录
@@ -60,13 +62,13 @@ tsc -init
       "typeRoots": [],                       // 包含类型声明的文件列表
       "types": [],                           // 需要包含的类型声明文件名列表
       "allowSyntheticDefaultImports": true,  // 允许从没有设置默认导出的模块中默认导入。
-  
+
       /* Source Map Options */
       "sourceRoot": "./",                    // 指定调试器应该找到 TypeScript 文件而不是源文件的位置
       "mapRoot": "./",                       // 指定调试器应该找到映射文件而不是生成文件的位置
       "inlineSourceMap": true,               // 生成单个 soucemaps 文件，而不是将 sourcemaps 生成不同的文件
       "inlineSources": true,                 // 将代码与 sourcemaps 生成到一个文件中，要求同时设置了 --inlineSourceMap 或 --sourceMap 属性
-  
+
       /* 其他选项 */
       "experimentalDecorators": true,        // 启用装饰器
       "emitDecoratorMetadata": true          // 为装饰器提供元数据的支持
@@ -89,4 +91,3 @@ tsc -init
     "files":["xx.ts"]
 }
 ```
-

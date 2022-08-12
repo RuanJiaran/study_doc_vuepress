@@ -1,3 +1,5 @@
+# 开始
+
 ## 传统方式运行 ts
 
 ##### 1. 安装 tsc 工具
@@ -20,9 +22,9 @@ tsc index.ts
 node index.js
 ```
 
-## 简便方式运行 ts 
+## 简便方式运行 ts
 
-##### 1. 安装 ts-node 
+##### 1. 安装 ts-node
 
 ```shell
 npm install -g ts-node
@@ -46,9 +48,8 @@ npm install -g typescript
 
 ```shell
 # 只监听指定文件并实时编译
-tsc -w index.ts 
+tsc -w index.ts
 
 # 监听当前目录下所有文件并实时编译
 tsc -w
 ```
-

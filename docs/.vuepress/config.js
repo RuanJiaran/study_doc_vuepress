@@ -1,8 +1,8 @@
 const { defaultTheme } = require('vuepress')
-const { getSidebar, getFileName } = require('./utils')
+const { rootpath, getSidebar, getFileName } = require('./utils')
 const { searchPlugin } = require('@vuepress/plugin-search')
-const path = require('path')
-const rootpath = path.resolve(__dirname, '..') //执行一次dirname将目录定位到docs目录
+
+const { tsRoutes, jsRoutes } = require('./routes')
 
 module.exports = {
   lang: 'zh-CN',
@@ -35,7 +35,7 @@ module.exports = {
       },
       {
         text: 'JavaScript',
-        link: '/js/eventloop.html',
+        link: '/js/core/eventloop.html',
         activeMatch: '^/js/',
       },
       {
@@ -83,15 +83,15 @@ module.exports = {
           link: '/ts/function.md',
         },
       ],
-      '/js/': [...getSidebar('js', getFileName(rootpath + '/js/'), false)],
-      '/ts/': [...getSidebar('ts', getFileName(rootpath + '/ts/'), false)],
-      '/vue2/': [...getSidebar('vue2', getFileName(rootpath + '/vue2/'), false)],
-      '/react/': [...getSidebar('react', getFileName(rootpath + '/react/'), false)],
-      '/react-admin/': [...getSidebar('react-admin', getFileName(rootpath + '/react-admin/'), false)],
-      '/nestjs/': [...getSidebar('nestjs', getFileName(rootpath + '/nestjs/'), false)],
-      '/http/': [...getSidebar('http', getFileName(rootpath + '/http/'), false)],
-      '/html-css/': [...getSidebar('html-css', getFileName(rootpath + '/html-css/'), false)],
-      '/docker/': [...getSidebar('docker', getFileName(rootpath + '/docker/'), false)],
+      '/js/': [...jsRoutes],
+      '/ts/': [...tsRoutes],
+      '/vue2/': [getSidebar('vue2', getFileName('/vue2'))],
+      '/react/': [getSidebar('react', getFileName('/react'))],
+      '/react-admin/': [getSidebar('react-admin', getFileName('/react-admin'))],
+      '/nestjs/': [getSidebar('nestjs', getFileName('/nestjs'))],
+      '/http/': [],
+      '/html-css/': [getSidebar('html-css', getFileName('/html-css'))],
+      '/docker/': [getSidebar('docker', getFileName('/docker'))],
     },
   }),
 }

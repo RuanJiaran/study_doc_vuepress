@@ -1,25 +1,26 @@
-## typeof类型保护
+# 类型保护
 
-将`typeof x === "number"`抽象成一个函数，因为TypeScript可以将它识别为一个类型保护。 也就是说我们可以直接在代码里检查类型了。
+## typeof 类型保护
+
+将`typeof x === "number"`抽象成一个函数，因为 TypeScript 可以将它识别为一个类型保护。 也就是说我们可以直接在代码里检查类型了。
 
 ```js
 function padLeft(value: string, padding: string | number) {
-    if (typeof padding === "number") {
-        return Array(padding + 1).join(" ") + value;
-    }
-    if (typeof padding === "string") {
-        return padding + value;
-    }
-    throw new Error(`Expected string or number, got '${padding}'.`);
+  if (typeof padding === 'number') {
+    return Array(padding + 1).join(' ') + value
+  }
+  if (typeof padding === 'string') {
+    return padding + value
+  }
+  throw new Error(`Expected string or number, got '${padding}'.`)
 }
 ```
 
-这些`typeof`类型保护只有两种形式能被识别：`typeof v === "typename"`和`typeof v !== "typename"`，`typename`必须是`number`，`string`，`boolean`或`symbol`。 但是TypeScript并不会阻止你与其它字符串比较，语言不会把那些表达式识别为类型保护。
+这些`typeof`类型保护只有两种形式能被识别：`typeof v === "typename"`和`typeof v !== "typename"`，`typename`必须是`number`，`string`，`boolean`或`symbol`。 但是 TypeScript 并不会阻止你与其它字符串比较，语言不会把那些表达式识别为类型保护。
 
+## instanceof 类型保护
 
-## instanceof类型保护
-
-instanceof类型保护是通过构造函数来细化类型的一种方式
+instanceof 类型保护是通过构造函数来细化类型的一种方式
 
 ```js
 interface Padder {
@@ -57,4 +58,4 @@ if (padder instanceof StringPadder) {
 }
 ```
 
-instanceof的右侧要求是一个构造函数
+instanceof 的右侧要求是一个构造函数

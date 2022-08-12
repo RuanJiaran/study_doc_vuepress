@@ -1,16 +1,17 @@
-## 定义 <!--{docsify-ignore-all}-->
-```js
-function padLeft(value: string, padding: string | number) {
-    
-}
+# 联合类型
 
-let indentedString = padLeft("Hello world", 3);
+## 定义 <!--{docsify-ignore-all}-->
+
+```js
+function padLeft(value: string, padding: string | number) {}
+
+let indentedString = padLeft('Hello world', 3)
 ```
 
-联合类型表示一个值可以是几种类型之一。 我们用竖线（`|`）分隔每个类型，所以number | string 表示一个值可以是number或string。
-
+联合类型表示一个值可以是几种类型之一。 我们用竖线（`|`）分隔每个类型，所以 number | string 表示一个值可以是 number 或 string。
 
 !>注意：如果一个值是联合类型，我们只能访问此联合类型的所有类型里共有的成员。
+
 ```js
 interface Bird {
     fly();
