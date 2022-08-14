@@ -1,13 +1,15 @@
+# 清除浮动
+
 ## 案例
 
 给父盒子设置一个 boder，内部放两个盒子一个 big 一个 small，未给 big 和 small 设置浮动，则他们会默认撑开父盒子
 
-![在这里插入图片描述](./img/11.jpeg)
+![在这里插入图片描述](/img/11.jpeg)
 
 当我给内部两个盒子加上 float 属性的时候
 底部的 footer 盒子就会顶上来，然后父盒子因为没设置高度，变成一条线，big 和 small 已经浮动了
 
-![在这里插入图片描述](./img/12.jpeg)
+![在这里插入图片描述](/img/12.jpeg)
 
 ## 4 种清除浮动的方法
 
@@ -58,11 +60,12 @@
 
 **缺点：** 由于 IE6-7 不支持`：after`，使用`zoom：1`
 
-![在这里插入图片描述](./img/13.png)
+![在这里插入图片描述](/img/13.png)
 
 ```html
-/*伪元素是行内元素 正常浏览器清除浮动方法*/ .clearfix:after{ content: ""; display: block; height: 0; clear:both;
-visibility: hidden; } .clearfix{ *zoom: 1; /*ie6清除浮动的方式 *号只有IE6-IE7执行，其他浏览器不执行*/ }
+/*伪元素是行内元素 正常浏览器清除浮动方法*/ .clearfix:after{ content: ""; display: block; height: 0;
+clear:both; visibility: hidden; } .clearfix{ *zoom: 1; /*ie6清除浮动的方式
+*号只有IE6-IE7执行，其他浏览器不执行*/ }
 
 <body>
   <div class="father clearfix">
@@ -76,7 +79,7 @@ visibility: hidden; } .clearfix{ *zoom: 1; /*ie6清除浮动的方式 *号只有
 
 #### 4.使用 before 和 after 双伪元素清除浮动 `推荐使用`
 
-![在这里插入图片描述](./img/14.png)
+![在这里插入图片描述](/img/14.png)
 
 ```html
 <div class="father clearfix">

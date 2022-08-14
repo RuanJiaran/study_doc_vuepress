@@ -1,3 +1,5 @@
+# 浏览器 url 请求过程
+
 ## 简单分析
 
 简单的分析，从输入 `URL`到回车后发生的行为如下：
@@ -17,7 +19,7 @@
 
 `URL`的解析第过程中的第一步，一个`url`的结构解析如下：
 
-![img](./img/27a0c690-bdf4-11eb-ab90-d9ae814b240d.png)
+![img](/img/27a0c690-bdf4-11eb-ab90-d9ae814b240d.png)
 
 ### DNS 查询
 
@@ -25,7 +27,7 @@
 
 整个查询过程如下图所示：
 
-![img](./img/330fb770-bdf4-11eb-85f6-6fac77c0c9b3.png)
+![img](/img/330fb770-bdf4-11eb-85f6-6fac77c0c9b3.png)
 
 最终，获取到了域名对应的目标服务器`IP`地址
 
@@ -35,7 +37,7 @@
 
 在确定目标服务器服务器的`IP`地址后，则经历三次握手建立`TCP`连接，流程如下：
 
-![img](./img/ad750790-bdf4-11eb-85f6-6fac77c0c9b3.png)
+![img](/img/ad750790-bdf4-11eb-85f6-6fac77c0c9b3.png)
 
 ### 发送 http 请求
 
@@ -47,7 +49,7 @@
 - 请求头
 - 请求主体
 
-![img](./img/bbcb60f0-bdf4-11eb-ab90-d9ae814b240d.png)
+![img](/img/bbcb60f0-bdf4-11eb-ab90-d9ae814b240d.png)
 
 ### 响应请求
 
@@ -57,7 +59,7 @@
 - 响应头
 - 响应正文
 
-![img](./img/c5fe0140-bdf4-11eb-ab90-d9ae814b240d.png)
+![img](/img/c5fe0140-bdf4-11eb-ab90-d9ae814b240d.png)
 
 在服务器响应之后，由于现在`http`默认开始长连接`keep-alive`，当页面关闭之后，`tcp`链接则会经过四次挥手完成断开
 
@@ -77,4 +79,4 @@
 - 绘制 render 树（ paint ），绘制页面像素信息
 - 浏览器会将各层的信息发送给 GPU，GPU 会将各层合成（ composite ），显示在屏幕上
 
-![img](./img/db7bddd0-bdf4-11eb-85f6-6fac77c0c9b3.png)
+![img](/img/db7bddd0-bdf4-11eb-85f6-6fac77c0c9b3.png)

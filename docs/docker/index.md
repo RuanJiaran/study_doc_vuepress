@@ -1,4 +1,6 @@
-[Docker教程](https://www.runoob.com/docker/docker-tutorial.html)
+# 常用命令
+
+[Docker 教程](https://www.runoob.com/docker/docker-tutorial.html)
 
 ## search
 
@@ -35,8 +37,6 @@ docker rm 容器名称	#删除单个容器
 docker rm $(docker ps -aq)  #删除所有容器
 ```
 
-
-
 ## rmi
 
 删除镜像
@@ -56,7 +56,7 @@ docker rmi $(docker images -aq) #删除所有镜像
 docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 ```
 
-OPTIONS说明：
+OPTIONS 说明：
 
 - `-d` 后台运行
 - `--name` 给容器命名
@@ -64,7 +64,7 @@ OPTIONS说明：
 - `-it` 以后台交互方式运行
 - `-v` 数据卷挂载，前面是宿主机的目录，后面是容器内的目录
 - `-e username="ritchie"` 设置环境变量；
-- `-m  ` 设置容器使用内存最大值
+- `-m ` 设置容器使用内存最大值
 - `--expose=[]` 开放一个端口或一组端口；
 
 **用法**
@@ -79,10 +79,10 @@ docker run -it centos:centos7
 
 !> `-v` 的挂载是 **以宿主机为主**
 
-| host                          | container                            | mount result                                                 |
-| ----------------------------- | ------------------------------------ | ------------------------------------------------------------ |
-| 文件夹不存在/文件夹存在但为空 | 文件夹不存在/存在但为空/存在且不为空 | container中文件被覆盖（清空）                                |
-| 文件夹存在且不为空            | 文件夹不存在/存在但为空/存在且不为空 | container中文件夹内容被覆盖（原内容清空， 覆盖为host上文件夹内容 |
+| host                          | container                            | mount result                                                        |
+| ----------------------------- | ------------------------------------ | ------------------------------------------------------------------- |
+| 文件夹不存在/文件夹存在但为空 | 文件夹不存在/存在但为空/存在且不为空 | container 中文件被覆盖（清空）                                      |
+| 文件夹存在且不为空            | 文件夹不存在/存在但为空/存在且不为空 | container 中文件夹内容被覆盖（原内容清空， 覆盖为 host 上文件夹内容 |
 
 ## exec
 
@@ -149,9 +149,9 @@ docker commit -m='提交的描述信息' -a='rjr' a5d6e32ec597 testapp:1.0.0
 docker build [OPTIONS] PATH | URL | -
 ```
 
-OPTIONS说明：
+OPTIONS 说明：
 
-- **-f** :  指定要使用的Dockerfile路径；
+- **-f** : 指定要使用的 Dockerfile 路径；
 - **--tag, -t** : 镜像的名字及标签，通常 name:tag 或者 name 格式；可以在一次构建中为一个镜像设置多个标签
 
 **用法示例**
@@ -159,7 +159,7 @@ OPTIONS说明：
 ```shell
 docker build -f f:/docker/Dockerfile -t mycentos:1.0 .
 
-docker build -t mycentos:1.0 .  
+docker build -t mycentos:1.0 .
 ```
 
 !> 注意最后面有个 `.` 不能掉了
@@ -174,7 +174,7 @@ docker logs -ft 容器名称|容器id
 
 ## system
 
-随时docker下载的镜像越来越多，通过 docker rmi 命令无法彻底清除docker缓存，需要使用下面的命令从根本上清除
+随时 docker 下载的镜像越来越多，通过 docker rmi 命令无法彻底清除 docker 缓存，需要使用下面的命令从根本上清除
 
 ```shell
 docker system prune --volumes
@@ -184,6 +184,5 @@ docker system prune --volumes
 
 - 所有停止的容器
 - 所有不被任何一个容器使用的网络
-- 所有不被任何一个容器使用的volume
+- 所有不被任何一个容器使用的 volume
 - 所有无实例的**镜像**
-

@@ -1,10 +1,12 @@
+# get 和 post 区别
+
 ## 是什么
 
 `GET`和`POST`，两者是`HTTP`协议中发送请求的方法
 
 #### GET
 
-`GET`方法请求一个指定资源的表示形式，使用GET的请求应该只被用于获取数据
+`GET`方法请求一个指定资源的表示形式，使用 GET 的请求应该只被用于获取数据
 
 #### OST
 
@@ -18,15 +20,15 @@
 
 从`w3schools`得到的标准答案的区别如下：
 
-- GET在浏览器回退时是无害的，而POST会再次提交请求。
-- GET产生的URL地址可以被Bookmark，而POST不可以。
-- GET请求会被浏览器主动cache，而POST不会，除非手动设置。
-- GET请求只能进行url编码，而POST支持多种编码方式。
-- GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。
-- GET请求在URL中传送的参数是有长度限制的，而POST没有。
-- 对参数的数据类型，GET只接受ASCII字符，而POST没有限制。
-- GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。
-- GET参数通过URL传递，POST放在Request body中
+- GET 在浏览器回退时是无害的，而 POST 会再次提交请求。
+- GET 产生的 URL 地址可以被 Bookmark，而 POST 不可以。
+- GET 请求会被浏览器主动 cache，而 POST 不会，除非手动设置。
+- GET 请求只能进行 url 编码，而 POST 支持多种编码方式。
+- GET 请求参数会被完整保留在浏览器历史记录里，而 POST 中的参数不会被保留。
+- GET 请求在 URL 中传送的参数是有长度限制的，而 POST 没有。
+- 对参数的数据类型，GET 只接受 ASCII 字符，而 POST 没有限制。
+- GET 比 POST 更不安全，因为参数直接暴露在 URL 上，所以不能用来传递敏感信息。
+- GET 参数通过 URL 传递，POST 放在 Request body 中
 
 ### 参数位置
 
@@ -65,7 +67,7 @@ name=qiming.c&age=22
 
 `HTTP`协议没有`Body`和 `URL` 的长度限制，对 `URL`限制的大多是浏览器和服务器的原因
 
-`IE`对`URL`长度的限制是2083字节(2K+35)。对于其他浏览器，如Netscape、FireFox等，理论上没有长度限制，其限制取决于操作系统的支持
+`IE`对`URL`长度的限制是 2083 字节(2K+35)。对于其他浏览器，如 Netscape、FireFox 等，理论上没有长度限制，其限制取决于操作系统的支持
 
 这里限制的是整个`URL`长度，而不仅仅是参数值的长度
 
@@ -81,8 +83,8 @@ name=qiming.c&age=22
 
 ### 数据包
 
-对于`GET`方式的请求，浏览器会把`http header`和`data`一并发送出去，服务器响应200（返回数据）
+对于`GET`方式的请求，浏览器会把`http header`和`data`一并发送出去，服务器响应 200（返回数据）
 
-对于`POST`，浏览器先发送`header`，服务器响应100 `continue`，浏览器再发送`data`，服务器响应200 ok
+对于`POST`，浏览器先发送`header`，服务器响应 100 `continue`，浏览器再发送`data`，服务器响应 200 ok
 
 并不是所有浏览器都会在`POST`中发送两次包，`Firefox`就只发送一次

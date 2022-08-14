@@ -28,7 +28,7 @@ DOM 树是结构，树是由 DOM 元素和属性节点组成的，DOM 的本质�
 
 上面的 html 用 dom 树表示如下
 
-![](./img/20201024140711640.png)
+![](/img/20201024140711640.png)
 
 ## DOM 节点操作
 
@@ -179,21 +179,22 @@ oUl.appendChild(frag)
 - attribute 修改 html 属性，会改变 html 结构
 - 两者都可能引起 DOM 重新渲染
 
-![](./img/dom1.png)
+![](/img/dom1.png)
 
-![](./img/dom2.png)
+![](/img/dom2.png)
 
 ## DOM 性能
 
-![](./img/dom3.png)
+![](/img/dom3.png)
 
-![](./img/dom4.png)
+![](/img/dom4.png)
 
 ## DOM 相关面试题
 
 ```html
-问题1、dom是哪种基本的数据结构？ 树结构 问题2、Dom操作的常用API有哪些？ ①获取DOM节点，以及节点的property和Attribute
-②获取父节点，获取子节点 childNodes/ parentNode ③新增节点，删除节点 问题3、Dom节点的Attribute和Property有和区别？
-①property是对JS对象属性的修改 ②Attribute是对html标签属性的修改 问题4、DOM性能优化。
+问题1、dom是哪种基本的数据结构？ 树结构 问题2、Dom操作的常用API有哪些？
+①获取DOM节点，以及节点的property和Attribute ②获取父节点，获取子节点 childNodes/ parentNode
+③新增节点，删除节点 问题3、Dom节点的Attribute和Property有和区别？ ①property是对JS对象属性的修改
+②Attribute是对html标签属性的修改 问题4、DOM性能优化。
 将频繁的操作改为一次性操作，通过创建文档碎片，最后一次性加入文档碎片。
 ```

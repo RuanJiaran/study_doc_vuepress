@@ -1,10 +1,12 @@
+# docker compose 命令
+
 !> 所有命令在 `docker-compose.yml` 文件目录下运行
 
 ## up
 
-启动所有docker compose服务，镜像没构建会先构建 image 镜像
+启动所有 docker compose 服务，镜像没构建会先构建 image 镜像
 
-- `-d` 启动所有docker compose服务，并后台运行
+- `-d` 启动所有 docker compose 服务，并后台运行
 
 ```shell
 docker compose up
@@ -92,4 +94,3 @@ docker compose logs 服务id
 ```shell
 docker compose exec 服务id
 ```
-

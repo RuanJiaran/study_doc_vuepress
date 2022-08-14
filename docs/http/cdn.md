@@ -1,3 +1,5 @@
+# cdn 原理
+
 ## 是什么
 
 CDN (全称 Content Delivery Network)，即内容分发网络
@@ -8,7 +10,7 @@ CDN (全称 Content Delivery Network)，即内容分发网络
 
 于是，用户在上网的时候不用直接访问源站，而是访问离他“最近的”一个 CDN 节点，术语叫**边缘节点**，其实就是缓存了源站内容的代理服务器。如下图：
 
-![img](./img/4f0289f0-b86b-11eb-85f6-6fac77c0c9b3.png)
+![img](/img/4f0289f0-b86b-11eb-85f6-6fac77c0c9b3.png)
 
 ## 原理分析
 
@@ -33,7 +35,7 @@ CDN (全称 Content Delivery Network)，即内容分发网络
 
 整体流程如下图：
 
-![img](./img/588d7890-b86b-11eb-85f6-6fac77c0c9b3.png)
+![img](/img/588d7890-b86b-11eb-85f6-6fac77c0c9b3.png)
 
 #### 缓存代理
 

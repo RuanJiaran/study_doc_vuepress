@@ -1,0 +1,1 @@
+import{_ as r,o as c,c as a,b as e,e as t}from"./app.028a31b3.js";const d={},o=e("h1",{id:"curd-\u64CD\u4F5C",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#curd-\u64CD\u4F5C","aria-hidden":"true"},"#"),t(" CURD \u64CD\u4F5C")],-1),s=[o];function _(n,i){return c(),a("div",null,s)}var l=r(d,[["render",_],["__file","curd.html.vue"]]);export{l as default};

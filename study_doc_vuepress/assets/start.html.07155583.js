@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-4ee04119","path":"/nestjs/start/start.html","title":"\u5B89\u88C5","lang":"zh-CN","frontmatter":{},"excerpt":"","headers":[{"level":1,"title":"\u5B89\u88C5","slug":"\u5B89\u88C5","children":[]}],"git":{"updatedTime":null,"contributors":[]},"filePathRelative":"nestjs/start/start.md"}');export{t as data};

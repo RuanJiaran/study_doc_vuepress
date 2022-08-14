@@ -1,8 +1,10 @@
+# 盒模型
+
 ## 什么是[盒子模型](https://so.csdn.net/so/search?q=盒子模型&spm=1001.2101.3001.7020)
 
 在我们 HTML 页面中，每一个元素都可以被看作一个盒子，而这个盒子由：内容区（content）、填充区（padding）、边框区（border）、外边界区（[margin](https://so.csdn.net/so/search?q=margin&spm=1001.2101.3001.7020)）四部分组成。
 
-![在这里插入图片描述](./img/1.png)
+![在这里插入图片描述](/img/1.png)
 
 ## 两种盒子模型
 
@@ -18,7 +20,7 @@
 
 ## JS 盒模型
 
-![img](./img/2.png)
+![img](/img/2.png)
 
 **怎么获取和设置 box 的内容宽高**
 
