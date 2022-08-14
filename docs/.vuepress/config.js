@@ -8,8 +8,8 @@ module.exports = {
   lang: 'zh-CN',
   title: '学习笔记',
   description: '个人学习笔记',
-  base: '/web',
-  dest: './web',
+  base: '/study_doc_vuepress',
+  dest: './dist',
   markdown: {
     headers: {
       level: [1, 2, 3],
