@@ -8,8 +8,8 @@ module.exports = {
   lang: 'zh-CN',
   title: '学习笔记',
   description: '个人学习笔记',
-  base: '/study_doc_vuepress',
-  dest: './dist',
+  base: '/study_doc_vuepress', //项目根路径
+  dest: './dist', // 项目打包目录
   markdown: {
     headers: {
       level: [1, 2, 3],

@@ -11,7 +11,7 @@ features:
     details: VuePress 会为每个页面预渲染生成静态的 HTML，同时，每个页面被加载的时候，将作为 SPA 运行。
 actions:
   - text: 开始阅读
-    link: /js/eventloop.html
+    link: /js/core/eventloop.html
     type: primary
 footer: 结束
 ---
