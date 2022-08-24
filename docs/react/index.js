@@ -4,6 +4,7 @@ const routes = [
   getSidebar('基础', getFileName('/react/base')),
   getSidebar('进阶', getFileName('/react/advanced')),
   getSidebar('核心原理', getFileName('/react/core')),
+  getSidebar('实战', getFileName('/react/practice')),
   getSidebar('常见问题', getFileName('/react/question')),
 ]
 
