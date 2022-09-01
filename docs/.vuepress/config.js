@@ -128,6 +128,31 @@ module.exports = {
               },
             ],
           },
+          {
+            text: '前端工程化',
+            children: [
+              {
+                text: 'Webpack',
+                link: 'https://webpack.docschina.org/concepts/',
+              },
+              {
+                text: 'Babel',
+                link: 'https://www.babeljs.cn/docs/',
+              },
+              {
+                text: 'Prettier',
+                link: 'https://www.prettier.cn/docs/index.html',
+              },
+              {
+                text: 'Eslint',
+                link: 'https://eslint.bootcss.com/',
+              },
+              {
+                text: 'Stylelint',
+                link: 'https://stylelint.io/',
+              },
+            ],
+          },
         ],
       },
     ],
