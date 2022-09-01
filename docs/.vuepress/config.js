@@ -88,6 +88,10 @@ module.exports = {
                 link: 'https://cn.vuejs.org/',
               },
               {
+                text: 'Element UI',
+                link: 'https://element.eleme.cn/#/zh-CN/component/installation',
+              },
+              {
                 text: 'VuePress',
                 link: 'https://v2.vuepress.vuejs.org/zh/',
               },
@@ -103,6 +107,10 @@ module.exports = {
               {
                 text: 'Create React App 中文文档',
                 link: 'https://www.html.cn/create-react-app/',
+              },
+              {
+                text: 'Ant Design',
+                link: 'https://ant.design/components/overview-cn/',
               },
             ],
           },
