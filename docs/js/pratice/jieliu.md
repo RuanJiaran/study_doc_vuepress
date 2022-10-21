@@ -58,7 +58,7 @@
   /**
    * 节流函数，是一个闭包
    * @func 函数
-   * @delay 间隔执行时间
+   * @delay 间隔时间
    */
   function throttle(func, delay) {
     let timer = 0
