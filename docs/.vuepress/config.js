@@ -23,7 +23,7 @@ module.exports = {
         },
       },
       maxSuggestions: 20,
-      isSearchable: page => page.path !== '/', // 排除首页不在搜索索引里面
+      isSearchable: (page) => page.path !== '/', // 排除首页不在搜索索引里面
     }),
   ],
   theme: defaultTheme({
@@ -77,8 +77,17 @@ module.exports = {
         text: '常用文档',
         children: [
           {
-            text: 'ES6 学习文档',
-            link: 'http://caibaojian.com/es6/README_about.html',
+            text: 'JS',
+            children: [
+              {
+                text: 'ES6 学习文档',
+                link: 'http://caibaojian.com/es6/README_about.html',
+              },
+              {
+                text: 'lodash',
+                link: 'https://www.lodashjs.com/',
+              },
+            ],
           },
           {
             text: 'Vue',
@@ -111,6 +120,18 @@ module.exports = {
               {
                 text: 'Ant Design',
                 link: 'https://ant.design/components/overview-cn/',
+              },
+              {
+                text: 'duim',
+                link: 'https://d.umijs.org/zh-CN/guide',
+              },
+              {
+                text: 'ahooks',
+                link: 'https://ahooks.js.org/',
+              },
+              {
+                text: 'react-dom-router',
+                link: 'https://reactrouter.com/en/main',
               },
             ],
           },
