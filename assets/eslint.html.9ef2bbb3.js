@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-7798dd98","path":"/ts/codeFormat/eslint.html","title":"","lang":"zh-CN","frontmatter":{},"excerpt":"","headers":[],"git":{"updatedTime":1666337892000,"contributors":[{"name":"RuanJiaran","email":"30953971+RuanJiaran@users.noreply.github.com","commits":1}]},"filePathRelative":"ts/codeFormat/eslint.md"}');export{t as data};
