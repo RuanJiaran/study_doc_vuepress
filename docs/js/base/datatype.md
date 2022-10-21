@@ -39,66 +39,6 @@ b.age = 21
 
 !>由于引用类型的变量只存指针，而对象本身存储在堆中 。因此，当把一个对象赋值给多个变量时，就相当于把同一个对象地址赋值给了每个变量指针 。这样，每个变量都指向了同一个对象，当通过一个变量修改对象，其他变量也会同步更新。因此产生了`浅拷贝`，`深拷贝`
 
-## 浅拷贝，深拷贝
-
-###### 浅拷贝
-
-```js
-const obj = { base: { name: 'Jack' } }
-
-const obj2 = Object.assign({}, obj) // 浅拷贝
-
-obj2.base.name = 'Tom'
-
-console.log(obj.base.name, obj2.base.name) //Tom Tom
-```
-
-###### 深拷贝
-
-```js
-const obj = { base: { name: 'Jack' } }
-
-const obj2 = JSON.parse(JSON.stringify(obj)) // 深拷贝
-
-obj2.base.name = 'Tom'
-
-console.log(obj.base.name, obj2.base.name) //Jack Tom
-```
-
-手写深拷贝函数（递归）
-
-```js
-/**
- * 深拷贝
- * @param {Object} obj 要拷贝的对象
- */
-function deepClone(obj = {}) {
-  if (typeof obj !== 'object' || obj == null) {
-    // obj 是 null ，或者不是对象和数组，直接返回
-    return obj
-  }
-
-  // 初始化返回结果
-  let result
-  if (obj instanceof Array) {
-    result = []
-  } else {
-    result = {}
-  }
-
-  for (let key in obj) {
-    // 保证 key 是原型的属性
-    if (obj.hasOwnProperty(key)) {
-      // 递归调用！！！
-      result[key] = deepClone(obj[key])
-    }
-  }
-
-  // 返回结果
-  return result
-}
-```
-
 ## typeof 检测数据类型
 
 ```js
