@@ -1,218 +1,178 @@
-# setState 执行机制
+# useState 注意事项
 
-## 是什么
+#### 1. 根据hook的规则,使用useState的位置有限制
 
-一个组件的显示形态可以由数据状态和外部参数所决定，而数据状态就是`state`
+- 不能在循环，条件，嵌套函数等中调用 useState()。
 
-当需要修改里面的值的状态需要通过调用`setState`来改变，从而达到更新组件内部数据的作用
+- 在多个 useState() 调用中，渲染之间的调用顺序必须相同。
 
-如下例子：
+- 必须仅在函数组件或自定义钩子内部调用 useState()。
 
-```jsx
-import React, { Component } from 'react'
+#### 2. useState存入的值只是该值的引用（引用类型）
 
-export default class App extends Component {
-  constructor(props) {
-    super(props)
+```tsx
+const textObj = {name:"dx"}
 
-    this.state = {
-      message: 'Hello World',
+const [useState1, setUseState1] = useState(textObj )
+const [useState2, setUseState2] = useState(textObj )
+
+/** usestate的操作不要放在函数的最外层，这里只是简单的代码展示，你可以将set操作放在某个函数里面 */
+setUseState1((oldUseState1) => {
+    oldUseState1.age = 18
+    return {...oldUseState1}
+})
+
+useEffect(() => {
+    /** 改变一个会导致两个都改变,深浅拷贝的问题 */
+    console.log(useState1)  // {name: "dx", age: 18}
+    console.log(useState2)  // {name: "dx", age: 18}
+},[
+    useState1
+])
+```
+
+#### 3. useState 如果保存引用数据，useEffect检测不到变化
+
+把上面的例子做一个小改动，`setUseState1` 里面 `return oldUseState1` 而不是 `return {...oldUseState1}`
+
+```tsx
+const textObj = {name:"dx"}
+
+const [useState1, setUseState1] = useState(textObj )
+
+/** usestate的操作不要放在函数的最外层，这里只是简单的代码展示，你可以将set操作放在某个函数里面 */
+setUseState1((oldUseState1) => {
+    oldUseState1.age = 18
+    return oldUseState1
+})
+
+useEffect(() => {
+    /** 改变一个会导致两个都改变,深浅拷贝的问题 */
+    console.log(useState1)  
+},[
+    useState1
+])
+
+//结果是没有任何反应
+```
+
+#### 4. useState 无法保存一个函数
+
+```tsx
+const logname = () => {
+    console.log({name: "dx",age: "18"})
+}
+
+/** usestate保存函数测试 */
+const [func, setFunc] = useState(logname);
+
+useEffect(() => {
+    console.log(func)
+}, [func])
+
+// {name: "dx",age: "18"}
+// undefined
+```
+
+上面代码中从未调用过 logname ，结果 logname 却被执行了，并且 useEffect 里打印的是 undefined
+
+对上面例子修改下
+
+```tsx
+const logname = () => {
+    console.log({name: "dx",age: "18"})
+    return {name: "yx", age: "17"}
+}
+
+/** usestate保存函数测试 */
+const [func, setFunc] = useState(logname);
+
+useEffect(() => {
+    console.log(func)
+}, [func])
+
+// {name: "dx",age: "18"}
+// {name: "yx", age: "17"}
+```
+
+很明显，在 useState 中，函数会自动调用，并且保存函数返回的值，而不能保存函数本身。
+
+**怎么解决 useState 无法保存函数的问题呢**
+
+1. 把函数放在对象内的某个属性上
+
+```tsx
+const logname = () => {
+    return {name: "yx", age: "17"}
+}
+
+/** usestate保存函数测试 */
+const [func, setFunc] = useState({fc:logname});
+
+useEffect(() => {
+    console.log(func.fc)
+}, [func.fc])
+```
+
+2. 使用useCallback这个hook
+
+```tsx
+const lognameFC = useCallback(()=>{
+    const logname = () => {
+        return {name: "yx", age: "17"}
     }
-  }
+    return logname
+},[])
 
-  render() {
-    return (
-      <div>
-        <h2>{this.state.message}</h2>
-        <button onClick={e => this.changeText()}>面试官系列</button>
-      </div>
-    )
-  }
+useEffect(() => {
+    console.log(lognameFC())
+}, [lognameFC])
+```
 
-  changeText() {
-    this.setState({
-      message: 'JS每日一题',
-    })
-  }
+
+
+# 手写 useState 实现原理
+
+简单版本
+
+```tsx
+function useState(intlValue) {
+    let hookState = intlValue
+    //利用闭包保存函数
+    function setState(newState) {
+        hookState = newState 
+    }
+
+    return [hookState, setState]
+}
+
+const [count, setCount] = useState(1)
+const [number, setNumber] = useState(1)
+```
+
+
+
+```tsx
+function useState(init) {
+    let state;
+    // useState 无法保存函数
+    if(typeof init === "function") {
+        state = init()
+    } else {
+        state = init
+    }
+
+    const setState = (change) => {
+        // 判断一下是否传递过来的是函数
+        if(typeof change === "function") {
+            // 如果是函数，调用，并将之前的state传过去，接收到的返回值作为新的state并赋值
+            state = change(state)
+        } else {
+            // 如果不是函数，直接赋值
+            state = change;
+        }
+    }	
+    return [state, setState]
 }
 ```
 
-通过点击按钮触发`onclick`事件，执行`this.setState`方法更新`state`状态，然后重新执行`render`函数，从而导致页面的视图更新
-
-如果直接修改`state`的状态，如下：
-
-```jsx
-changeText() {
-    this.state.message = "你好啊,李银河";
-}
-```
-
-我们会发现页面并不会有任何反应，但是`state`的状态是已经发生了改变
-
-这是因为`React`并不像`vue2`中调用`Object.defineProperty`数据响应式或者`Vue3`调用`Proxy`监听数据的变化
-
-必须通过`setState`方法来告知`react`组件`state`已经发生了改变
-
-关于`state`方法的定义是从`React.Component`中继承，定义的源码如下：
-
-```js
-Component.prototype.setState = function (partialState, callback) {
-  invariant(
-    typeof partialState === 'object' || typeof partialState === 'function' || partialState == null,
-    'setState(...): takes an object of state variables to update or a ' +
-      'function which returns an object of state variables.'
-  )
-  this.updater.enqueueSetState(this, partialState, callback, 'setState')
-}
-```
-
-!>从上面可以看到`setState`第一个参数可以是一个对象，或者是一个函数，而第二个参数是一个回调函数，用于可以实时的获取到更新之后的数据
-
-## 更新类型
-
-在使用`setState`更新数据的时候，`setState`的更新类型分成：
-
-- 异步更新
-- 同步更新
-
-##### 异步更新
-
-先举出一个例子：
-
-```jsx
-changeText() {
-  this.setState({
-    message: "你好啊"
-  })
-  console.log(this.state.message); // Hello World
-}
-```
-
-从上面可以看到，最终打印结果为`Hello world`，并不能在执行完`setState`之后立马拿到最新的`state`的结果
-
-如果想要立刻获取更新后的值，在第二个参数的回调中更新后会执行
-
-```jsx
-changeText() {
-  this.setState({
-    message: "你好啊"
-  }, () => {
-    console.log(this.state.message); // 你好啊
-  });
-}
-```
-
-##### 同步更新
-
-同样先给出一个在`setTimeout`中更新的例子：
-
-```jsx
-changeText() {
-  setTimeout(() => {
-    this.setState({
-      message: "你好啊
-    });
-    console.log(this.state.message); // 你好啊
-  }, 0);
-}
-```
-
-上面的例子中，可以看到更新是同步
-
-再来举一个原生`DOM`事件的例子：
-
-```jsx
-componentDidMount() {
-  const btnEl = document.getElementById("btn");
-  btnEl.addEventListener('click', () => {
-    this.setState({
-      message: "你好啊,李银河"
-    });
-    console.log(this.state.message); // 你好啊,李银河
-  })
-}
-```
-
-### 小结
-
-- 在组件生命周期或 React 合成事件中，setState 是异步
-- 在 setTimeout，setInterval 或者原生 dom 事件中，setState 是同步
-
-## setState 是什么原因决定异步还是同步的
-
-this.state 是否异步，关键是看是否命中 batchUpdata 机制，命中就异步，未命中就同步。
-
-关于 batchUpdate 机制咱们看下官网的主流程图：
-
-![img](/img/v2-3dd589bd3985a388491899bdbcfe81d8_720w.jpg)
-
-![img](/img/v2-5d6e8e2b2e108a665ac8fbbb3112f9d9_720w.jpg)
-
-查看 batchUpdate 是否命中是决定 setState 异步或者同步的关键，如图所示，如果命中代表当前是异步，会执行保存组件到 dirtyComponents 中，如果没有命中会走右边，遍历所有 dirtyComponents 并执行调用和更新操作，当前就是同步。
-
-##### 哪些能命中 batchUpdate 机制
-
-- 生命周期和它调用的函数
-- react 注册的事件和它调用的函数
-- react 可以管理的入口命中的就是异步
-
-##### 哪些不能命中 batchUpdate 机制
-
-- setTimeout，setInterval 和他调用的函数
-- 自定义 dom 事件和他调用的函数
-- react 管不到的入口没命中就是同步
-
-## 批量更新
-
-同样先给出一个例子：
-
-```jsx
-handleClick = () => {
-  this.setState({
-    count: this.state.count + 1,
-  })
-  console.log(this.state.count) // 1
-
-  this.setState({
-    count: this.state.count + 1,
-  })
-  console.log(this.state.count) // 1
-
-  this.setState({
-    count: this.state.count + 1,
-  })
-  console.log(this.state.count) // 1
-}
-```
-
-点击按钮触发事件，打印的都是 1，页面显示 `count` 的值为 2
-
-对同一个值进行多次 `setState`， `setState` 的批量更新策略会对其进行覆盖，取最后一次的执行结果
-
-上述的例子，实际等价于如下：
-
-```js
-Object.assign(
-  previousState,
-  {index: state.count+ 1},
-  {index: state.count+ 1},
-  ...
-)
-```
-
-由于后面的数据会覆盖前面的更改，所以最终只加了一次
-
-如果是下一个`state`依赖前一个`state`的话，推荐给`setState`一个参数传入一个`function`，如下：
-
-```jsx
-onClick = () => {
-  this.setState((prevState, props) => {
-    return { count: prevState.count + 1 }
-  })
-  this.setState((prevState, props) => {
-    return { count: prevState.count + 1 }
-  })
-}
-```
-
-而在`setTimeout`或者原生`dom`事件中，由于是同步的操作，所以并不会进行覆盖现象

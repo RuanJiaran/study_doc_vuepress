@@ -103,6 +103,85 @@ insertMovie() {
 
 而写`key`则涉及到了节点的增和删，发现旧`key`不存在了，则将其删除，新`key`在之前没有，则插入，这就增加性能的开销
 
+## 为什么不能使用 index 作为 key
+
+```tsx
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+  <!-- Don't use this in production: -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function App() {
+      const [inputs, setInputs] = React.useState([
+        {
+          id: 1,
+          name: 'name1',
+          value: '1',
+        },
+        {
+          id: 2,
+          name: 'name2',
+          value: '2',
+        },
+        {
+          id: 3,
+          name: 'name3',
+          value: '3',
+        },
+      ])
+      React.useEffect(() => {}, [])
+
+      const delFirstInput = () => {
+        const newInputs = JSON.parse(JSON.stringify(inputs))
+        newInputs.shift()
+        setInputs(newInputs)
+      }
+
+      return (
+        <>
+          {inputs.map((item, index) => {
+            return (
+              <div key={index}>
+                {item.name}
+                <input />
+              </div>
+            )
+          })}
+          <div>
+            <button onClick={delFirstInput}>删除第一项</button>
+          </div>
+        </>
+      )
+    }
+  </script>
+</html>
+
+<script type="text/babel">
+  // const root = ReactDOM.createRoot(document.getElementById('root'))
+  // root.render(<App />)
+
+  ReactDOM.render(<App />, document.getElementById('root'))
+</script>
+```
+
+点击删除第一项界面显示的结果
+
+![image-20221023215958815](../../.vuepress/public/img/image-20221023215958815.png)
+
+页面渲染好了之后，3 个 input 输入框依次输入1，2，3，当我们用 index 作为 key 的时候，点击删除第一项按钮会发现，左侧文字正确改变，input 输入框最后一项没了，这不是我们希望的样子。 因为当我们使用 index 作为 key 时，此时 key 为 0、1、2，删掉第一项后 key 变为 0、1，此时 react 在执行 diff 算法过程中，任务 key=0 存在，只需要更新子节点的值，所以左侧的 name 成功改变，而 input 的值非受控，不会更新。同时在对比计算中少了 key=2 这项，删除了最后一项。
+
 ## 总结
 
 良好使用`key`属性是性能优化的非常关键的一步，注意事项为：
