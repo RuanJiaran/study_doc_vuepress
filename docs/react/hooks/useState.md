@@ -1,14 +1,26 @@
-# useState 注意事项
+# useState
 
-#### 1. 根据hook的规则,使用useState的位置有限制
+不要在循环，条件或[嵌套](https://so.csdn.net/so/search?q=嵌套&spm=1001.2101.3001.7020)函数中调用 Hook， 确保总是在你的 React 函数的最顶层以及任何 return 之前调用他们。遵守这条规则，你就能确保 Hook 在每一次渲染中都按照同样的顺序被调用。这让 React 能够在多次的 `useState` 和 `useEffect` 调用之间保持 hook 状态的正确。***必须仅在函数组件或自定义钩子内部调用 useState()。***
 
-- 不能在循环，条件，嵌套函数等中调用 useState()。
+## 用法
 
-- 在多个 useState() 调用中，渲染之间的调用顺序必须相同。
+```tsx
+const [count,setCount] = useState(0)
+// 修改 count 的两种用法
+setCount(count+1)
+setCount((preCount)=>preCount+1)
+```
 
-- 必须仅在函数组件或自定义钩子内部调用 useState()。
+## 有什么好处
 
-#### 2. useState存入的值只是该值的引用（引用类型）
+- 可以保存变量状态
+- 变量状态改变，页面会自动重新渲染
+
+## 为什么不能在条件，循环中调用
+
+为了保证多个 useState 在每次页面重新渲染时的调用顺序都一致，这样拿到的返回值和变量就都能对应上。
+
+## useState存入的值只是该值的引用（引用类型）
 
 ```tsx
 const textObj = {name:"dx"}
@@ -31,7 +43,7 @@ useEffect(() => {
 ])
 ```
 
-#### 3. useState 如果保存引用数据，useEffect检测不到变化
+#### ## useState 如果保存引用数据，useEffect检测不到变化
 
 把上面的例子做一个小改动，`setUseState1` 里面 `return oldUseState1` 而不是 `return {...oldUseState1}`
 
@@ -56,7 +68,7 @@ useEffect(() => {
 //结果是没有任何反应
 ```
 
-#### 4. useState 无法保存一个函数
+#### ## useState 无法保存一个函数
 
 ```tsx
 const logname = () => {
@@ -114,7 +126,7 @@ useEffect(() => {
 }, [func.fc])
 ```
 
-2. 使用useCallback这个hook
+1. 使用useCallback这个hook
 
 ```tsx
 const lognameFC = useCallback(()=>{
@@ -129,9 +141,7 @@ useEffect(() => {
 }, [lognameFC])
 ```
 
-
-
-# 手写 useState 实现原理
+## 手写 useState 实现原理
 
 简单版本
 
@@ -148,11 +158,6 @@ function useState(intlValue) {
 
 const [count, setCount] = useState(1)
 const [number, setNumber] = useState(1)
-```
-
-
-
-```tsx
 function useState(init) {
     let state;
     // useState 无法保存函数
