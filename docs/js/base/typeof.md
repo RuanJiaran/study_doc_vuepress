@@ -9,6 +9,13 @@
 
 - null 用`===null` 检测
 
+## isArray 判断是否为数组
+
+```js
+Array.isArray([]) //true
+Array.isArray(new Array()) //true
+```
+
 ## typeof
 
 ```js
@@ -77,3 +84,10 @@ console.log(
 ```
 
 !>还需要注意 null 和 undefined 都返回了 false，这是因为它们的类型就是自己本身，并不是 Object 创建出来它们，所以返回了 false
+
+## toString()
+
+toString() 是 Object 的原型方法，调用该方法，默认返回当前对象的 [[Class]] 。这是一个内部属性，其格式为[object Xxx] ，其中 Xxx 就是对象的类型。所以利用 Object.prototype.toString()方法可以对变量的类型进行比较准确的判断。
+
+该类型针对不同不同变量的类型返回的结果如下所示：
+![20211110100422920](../../.vuepress/public/img/20211110100422920.jpg)

@@ -16,15 +16,27 @@ obj2.base.name = 'Tom'
 console.log(obj.base.name, obj2.base.name) //Tom Tom
 ```
 
+- for ... in
+
+```js
+function copy(obj) {
+  const newObj = {}
+  for (const key in obj) {
+    newObj[key] = obj[key]
+  }
+  return newObj
+}
+```
+
 - Object.keys()
 
 ```js
 function cloneObj(obj) {
-    let clone = {};
-    for (let i of Object.keys(obj)) {
-        clone[i] = obj[i];
-    }
-    return clone;
+  let clone = {}
+  for (let i of Object.keys(obj)) {
+    clone[i] = obj[i]
+  }
+  return clone
 }
 ```
 
@@ -32,15 +44,13 @@ function cloneObj(obj) {
 
 ```js
 function cloneObj(obj) {
-    let clone = {};
-    for (let [key, value] of Object.entries(obj)) {
-        clone[key] = value;
-    }
-    return clone;
+  let clone = {}
+  for (let [key, value] of Object.entries(obj)) {
+    clone[key] = value
+  }
+  return clone
 }
 ```
-
-
 
 #### 深拷贝
 
