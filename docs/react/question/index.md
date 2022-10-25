@@ -125,3 +125,4 @@ function Welcome(props) {
 - props 是外部传入的数据参数，不可变
 - 没有 state 的叫做无状态组件，有 state 的叫做有状态组件
 - 多用 props，少用 state，也就是多写无状态组件
+
