@@ -74,6 +74,11 @@ module.exports = {
         activeMatch: '^/react-admin/',
       },
       {
+        text: '其它',
+        link: '/other/nginx_proxy.html',
+        activeMatch: '^/other/',
+      },
+      {
         text: '常用文档',
         children: [
           {
