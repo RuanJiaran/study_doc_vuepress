@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-cff9f4dc","path":"/ts/codeFormat/prettier.html","title":"","lang":"zh-CN","frontmatter":{},"excerpt":"","headers":[],"git":{"updatedTime":1667010439000,"contributors":[{"name":"rjr","email":"1606707347@qq.com","commits":1}]},"filePathRelative":"ts/codeFormat/prettier.md"}');export{t as data};
