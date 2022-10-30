@@ -6,8 +6,6 @@
   - webpack 在这方面下了很多功夫，cache-loader，tread-loader，开启多线程
   - vite 是浏览器按需加载的，不需要关心这方面
 
-
-
 #### 构建优化 vite(rollup)，webpack
 
 - 体积优化
@@ -16,10 +14,12 @@
 
 - 动态导入（代码分割）
 
+​		`import './index.less'`  写成这种函数导入形式  `import('./index.less')`
+
 - gzip 压缩
-
+- cdn（内容分发网络） 加速
+  - vite-plugin-cdn-import
 - 分包
-
   - vite.config.ts 分包
 
 ```js
