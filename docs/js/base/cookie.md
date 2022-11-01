@@ -1,14 +1,20 @@
-# cookie/localStorage/sessionStorage
+# Cookie/localStorage/sessionStorage
 
-## Cookie
+## Cookie 概念
 
-Cookie 设计初衷是用来和服务器通讯，而不是本地存储，他只是被‘借用’到本地存储
+***Cookie由服务器生成，发送给浏览器***。浏览器把cookie以 KV 形式存储到某个目录下的文本文件中，下一次请求同一网站时会把该cookie发送给服务器。由于cookie是存在客户端上的，所以浏览器加入了一些限制确保cookie不会被恶意使用，同时不会占据太多磁盘空间。所以每个域的cookie数量是有限制的。
 
 cookie 的内容主要包括：名字 name，值 value，过期时间 expires，路径 path 和域 domain。***路径和域一起构成 cookie 的作用范围***。***一般 cookie 储存在内存里，若设置了过期时间则储存在硬盘里***，浏览器页面关闭也不会失效，直到设置的过期时间后才失效。若不设置 cookie 的过期时间，则有效期为浏览器窗口的会话期间，关闭浏览器窗口就失效。
 
-## 原理
+## Cookie 原理
 
 *客户端请求服务器时，如果服务器需要记录该用户状态，服务端就使用 response 向客户端浏览器颁发一个 Cookie。而客户端浏览器会把 Cookie 保存起来。当浏览器再请求服务器时，浏览器把请求的网址连同该 Cookie 一同提交给服务器。*
+
+## Cookie 设置
+
+客户端设置cookie
+
+`document.cookie = "name=rjr;path=/;expires=2022-12-01T08:47:41.427Z" `
 
 ## Cookie 的使用场景
 
@@ -16,7 +22,7 @@ cookie 的内容主要包括：名字 name，值 value，过期时间 expires，
 
 用户的一次登录能够得到其它所有系统的信任，便可在其它所有系统中得到授权而无需再次登录。登录成功后设置 cookie 的domain 为主域名，设置 path 为 `/` 根路径。
 
-比如：oa.tencent.com，hr.tencent.com，code.tencent.com 这几个域名的主域名都是 www.tencent.com 
+比如：oa.tencent.com，hr.tencent.com，code.tencent.com 这几个域名的主域名都是 .tencent.com
 
 注意：只有主域名相同，浏览器在访问时才会携带对应的 cookie
 
@@ -32,12 +38,16 @@ cookie 的内容主要包括：名字 name，值 value，过期时间 expires，
 
 ## LocalStorage，SessionStorage 与 Cookie 相比
 
-- HTML5 专门为存储而设计，最大可存 5M
-- API 简单易用 setItem，getItem
-- 不会随 http 请求被发送出去
+![详解 Cookie，Session，Token_服务器](../../.vuepress/public/img/resize,m_fixed,w_1184.webp)
 
 ## Localstorage，SesstionStorage 不同点
 
 - localStorage 数据会永久存储，除非代码或手动删除
 - sessionStorage 数据只存在当前会话，浏览器关闭则清空
 - 一般用 localStorage 会更多一些
+
+
+
+[cookie 使用场景](https://blog.51cto.com/u_15490526/5554681)
+
+[cookie 名字解释](https://www.zhihu.com/question/445784456/answer/2352702788)
