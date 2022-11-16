@@ -95,7 +95,7 @@ console.log(3000)
 浏览器为了能够使得 JS 内部(macro)task 与 DOM 任务能够有序的执行，会在一个(macro)task 执行结束后，在下一个(macro)task 执行开始前，对页面进行重新渲染，流程如下
 
 ```text
-(macro)task->渲染->(macro)task->...
+(macro)task-> GUI 线程接管渲染 ->(macro)task->...
 ```
 
 包含：
@@ -123,18 +123,6 @@ microtask,可以理解是在当前 task 执行结束后立即执行的任务。�
 - `Process.nextTick`（Node 独有）
 - `MutationObserver`(浏览器独有，具体使用方式查看[这里](https://link.zhihu.com/?target=https%3A//link.juejin.im/%3Ftarget%3Dhttp%3A%2F%2Fjavascript.ruanyifeng.com%2Fdom%2Fmutationobserver.html)）
 - `Object.observe`(废弃)
-
-#### Event Loop 运行机制
-
-在 Event Loop（事件循环）中，每进行一次循环操作称为 tick，每一次 tick 的任务处理模型是比较复杂的，但关键步骤如下
-
-- 执行一个宏任务（栈中没有就从事件队列中获取）
-- 执行过程中如果遇到微任务，就将它添加到微任务的任务队列中
-- 宏任务执行完毕后，立即执行当前微任务队列中的所有微任务（依次执行）
-- 当前宏任务执行完毕，开始检查渲染，然后 GUI 线程接管渲染
-- 渲染完毕后，JS 线程继续接管，开始下一个宏任务（从事件队列中获取）
-
-![](/img/1644291701947503.jpg)
 
 ## 特别注意
 
