@@ -216,6 +216,8 @@ obj2.speak2() // windowName
 
 ###### 示例 3（在类中）
 
+## class 类的 this
+
 ```js
 class Person {
   speak = () => {
@@ -431,6 +433,8 @@ say()
 ```
 
 ## 箭头函数其它特性
+
+箭头函数不存在变量提升
 
 #### 箭头函数不能使用 new
 
