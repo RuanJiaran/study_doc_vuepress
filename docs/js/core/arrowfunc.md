@@ -128,6 +128,47 @@ obj2.obj1.foo() // 23
 obj2.foo() // 18
 ```
 
+## function 函数 和 var 变量提升优先级问题
+
+function 函数提升优先级高于 var 变量提升，且不会被同名变量声明时覆盖，但是会被同名变量赋值后后覆盖
+
+**案例一**
+
+```js
+var a = 4
+function fn(){
+    console.log(a)
+    var 5
+}
+fn() // undefined
+```
+
+上面代码中有两个作用域，windows 全局作用域和 fn 函数作用域。在打印变量 a 时会现在 fn 函数作用域里面找，因为在执行 fn 函数时，在函数内部也会先进行变量提升，所有最终打印结果时 undefined。
+
+**案例二**
+
+```js
+function a(){}
+var a
+console.log(typeof a) // function
+```
+
+**案例三**
+
+```js
+function a(){}
+var a = 1
+console.log(typeof a) // number
+```
+
+**案例四**
+
+```js
+console.log(typeof a) // function
+function a(){}
+var a = 1
+```
+
 ## 箭头函数的 this
 
 - 箭头函数的 `this` 跟调用者无关
