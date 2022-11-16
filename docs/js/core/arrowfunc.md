@@ -500,3 +500,46 @@ let obj = {
 console.log(obj.b(1)) // 11
 console.log(obj.c(1)) // 11
 ```
+
+## settimeout 回调函数的 this 问题
+
+#### 为什么 settimeout 回调函数是普通函数时，函数内的 this 指向 window
+
+因为 setTimeout 这个方法是挂载到 window 对象上的。setTimeout 执行时，执行回调函数，回调函数中的 this 指向调用 setTimeout 的对象，window
+
+#### 箭头函数
+
+
+
+**案例**
+
+```js
+var name = 'windowName'
+
+let obj = {
+  name: 'obj',
+  sayName: function () {
+    console.log(this.name)
+  },
+  func1: function () {
+    setTimeout(() => {
+      this.sayName()
+    }, 100)
+  },
+  func2: function () {
+    setTimeout(function () {
+      this.sayName()
+    }, 100)
+  },
+  func3: () => {
+    this.sayName()
+  },
+}
+obj.func1() // obj
+obj.func2() // Uncaught TypeError: this.sayName is not a function
+obj.func3() // Uncaught TypeError: this.sayName is not a function
+```
+
+
+
+[好文](https://zhuanlan.zhihu.com/p/34368455)
