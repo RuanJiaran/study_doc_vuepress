@@ -1,8 +1,8 @@
-const { defaultTheme } = require('vuepress')
-const { rootpath, getSidebar, getFileName } = require('./utils')
-const { searchPlugin } = require('@vuepress/plugin-search')
+const { defaultTheme } = require('vuepress');
+const { rootpath, getSidebar, getFileName } = require('./utils');
+const { searchPlugin } = require('@vuepress/plugin-search');
 
-const { tsRoutes, jsRoutes, nestjsRoutes, reactRoutes, vue2Routes } = require('./routes')
+const { tsRoutes, jsRoutes, nestjsRoutes, reactRoutes, vue2Routes } = require('./routes');
 
 module.exports = {
   lang: 'zh-CN',
@@ -52,6 +52,11 @@ module.exports = {
         text: 'Vue2',
         link: '/vue2/core/data.html',
         activeMatch: '^/vue2/',
+      },
+      {
+        text: 'Webpack',
+        link: '/webpack/webpack4-vue2.html',
+        activeMatch: '^/webpack/',
       },
       {
         text: 'Nest 框架',
@@ -188,6 +193,7 @@ module.exports = {
       '/ts/': [...tsRoutes],
       '/vue2/': [...vue2Routes],
       '/react/': [...reactRoutes],
+      '/webpack/': [getSidebar('Webpack', getFileName('/webpack'))],
       '/react-admin/': [getSidebar('ReactAdmin', getFileName('/react-admin'))],
       '/nestjs/': [...nestjsRoutes],
       '/http/': [getSidebar('HTTP', getFileName('/http'))],
@@ -195,4 +201,4 @@ module.exports = {
       '/docker/': [getSidebar('Docker', getFileName('/docker'))],
     },
   }),
-}
+};
