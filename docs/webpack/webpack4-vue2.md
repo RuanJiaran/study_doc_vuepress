@@ -542,6 +542,8 @@ npm install -D babel-plugin-syntax-dynamic-import
 
 #### 9.2 修改 `src/router/index.js` 路由文件
 
+[文档](https://router.vuejs.org/zh/guide/advanced/lazy-loading.html)
+
 ```js{3-4,8-11}
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -563,3 +565,111 @@ export default new VueRouter({
   routes,
 });
 ```
+
+## 10. 图片压缩
+
+首先，`url-loader` 和 `image-webpack-loader` 都依赖于 `file-loader`，`file-loader` 简言之就是一个资源加载模块，去找文件资源的loader，然后也可以给静态资源生成哈希值，即唯一标识身份证。一般不用配置。我们主要是通过`url-loader`和`image-webpack-loader`做相关对应项配置
+
+#### 10.1 安装依赖
+
+```
+npm install -D file-loader@6 url-loader@4 image-webpack-loader@6
+```
+
+#### 10.2 修改 `webpack/webpack.common.js` 
+
+```js
+module: {
+    rules: [
+        {
+            test: /\.(png|jpe?g|gif|svg)$/i,
+            use: [
+                {
+                    loader: 'url-loader',
+                    options: {
+                        // 当文件大小小于limit byte时会把图片转换为base64编码的dataurl，否则返回普通的图片
+                        limit: 8192,
+                        name: 'images/[name].[contenthash:10].[ext]',
+                        esModule: false
+                    }
+                },
+                {
+                    loader: 'image-webpack-loader', // 压缩图片
+                    options: {
+                        mozjpeg: {
+                            //jpeg压缩
+                            progressive: true,
+                            quality: 65
+                        },
+                        gifsicle: {
+                            //gif压缩
+                            interlaced: true
+                        },
+                        optipng: {
+                            //png压缩
+                            enabled: true
+                        },
+                        pngquant: {
+                            //png压缩
+                            quality: [0.65, 0.9],
+                            speed: 4
+                        },
+                        webp: {
+                            quality: 60
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
+```
+
+## 11. 配置 CDN 文件加载
+
+#### 11.1 修改 `webpack/webpack.common.js` 文件
+
+在配置 `externals` 配置不需要打包的第三方依赖包，key 是引入的报名，value 是全局变量。例如 `import Vue from 'vue'` 对应的就是 `vue:'Vue'`
+
+```js{2-5}
+module.exports = {
+    externals: {
+        iview: 'iview',
+        vue: 'Vue'
+    }
+}
+```
+
+#### 11.2 修改 `index.html` 
+
+在入口文件 index.html 加入 vue 和 iview 对应的 cdn 文件
+
+```html{12-16,22-23}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="网红,kol,出海网红,kol直聘," />
+    <meta name="Keywords" content="网红,kol,出海网红,kol直聘," />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/iview@3.5.4/dist/styles/iview.css"
+    />
+
+    <title>KOL直聘网</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/iview@3.5.4/dist/iview.min.js"></script>
+  </body>
+</html>
+```
+
+
