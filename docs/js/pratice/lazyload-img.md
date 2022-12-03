@@ -33,10 +33,12 @@ window.addEventListener("scroll", (e) => {
 });
 
 function lazyLoadImg() {
+    // 滚动条垂直滚动高度
+    const scrollHeight =  window.scrollY || document.body.scrollTop || document.documentElement.scrollTop
     // 遍历每一张图
     for (let i of images) {
         //判断当前图片是否在可视区内
-        if (i.offsetTop <= window.innerHeight + window.scrollY) {
+        if (i.offsetTop <= window.innerHeight + scrollHeight) {
             //获取自定义data-src属性的值
             let trueSrc = i.getAttribute("data-src");
             //把值赋值给图片的src属性
