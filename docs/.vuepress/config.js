@@ -29,6 +29,25 @@ module.exports = {
   theme: defaultTheme({
     navbar: [
       {
+        text: 'GO',
+		children: [
+			{
+			  text: '学习笔记',
+			  link: '/go/index.html',
+			},
+			
+		  {
+		    text: '其它文档',
+			children:[
+				{
+					text: '菜鸟教程',
+					link: 'https://www.runoob.com/go/go-tutorial.html',
+				}
+			]
+		  },
+		]
+      },
+      {
         text: 'TypeScript',
         link: '/ts/as.html',
         activeMatch: '^/ts/',
@@ -189,6 +208,7 @@ module.exports = {
     ],
     sidebarDepth: 2,
     sidebar: {
+      '/go/': [getSidebar('GO', getFileName('/go'))],
       '/js/': [...jsRoutes],
       '/ts/': [...tsRoutes],
       '/vue2/': [...vue2Routes],
@@ -199,6 +219,7 @@ module.exports = {
       '/http/': [getSidebar('HTTP', getFileName('/http'))],
       '/html-css/': [getSidebar('HTML-CSS', getFileName('/html-css'))],
       '/docker/': [getSidebar('Docker', getFileName('/docker'))],
+      '/other/': [getSidebar('其它', getFileName('/other'))],
     },
   }),
 };
