@@ -12,7 +12,7 @@ module.exports = {
   dest: './dist', // 项目打包目录
   markdown: {
     headers: {
-      level: [1, 2, 3],
+      level: [1, 2, 3,4,5],
     },
   },
   plugins: [
