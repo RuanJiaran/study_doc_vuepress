@@ -2,7 +2,7 @@ const { defaultTheme } = require('vuepress');
 const { rootpath, getSidebar, getFileName } = require('./utils');
 const { searchPlugin } = require('@vuepress/plugin-search');
 
-const { tsRoutes, jsRoutes, nestjsRoutes, reactRoutes, vue2Routes } = require('./routes');
+const { tsRoutes, jsRoutes, nestjsRoutes, reactRoutes, vue2Routes, goRoutes } = require('./routes');
 
 module.exports = {
   lang: 'zh-CN',
@@ -12,7 +12,7 @@ module.exports = {
   dest: './dist', // 项目打包目录
   markdown: {
     headers: {
-      level: [1, 2, 3,4,5],
+      level: [1, 2, 3, 4, 5],
     },
   },
   plugins: [
@@ -30,22 +30,21 @@ module.exports = {
     navbar: [
       {
         text: 'GO',
-		children: [
-			{
-			  text: '学习笔记',
-			  link: '/go/index.html',
-			},
-			
-		  {
-		    text: '其它文档',
-			children:[
-				{
-					text: '菜鸟教程',
-					link: 'https://www.runoob.com/go/go-tutorial.html',
-				}
-			]
-		  },
-		]
+        children: [
+          {
+            text: '学习笔记',
+            link: '/go/start/index.html',
+          },
+          {
+            text: '其它文档',
+            children: [
+              {
+                text: '菜鸟教程',
+                link: 'https://www.runoob.com/go/go-tutorial.html',
+              },
+            ],
+          },
+        ],
       },
       {
         text: 'TypeScript',
@@ -208,7 +207,7 @@ module.exports = {
     ],
     sidebarDepth: 2,
     sidebar: {
-      '/go/': [getSidebar('GO', getFileName('/go'))],
+      '/go/': [...goRoutes],
       '/js/': [...jsRoutes],
       '/ts/': [...tsRoutes],
       '/vue2/': [...vue2Routes],
